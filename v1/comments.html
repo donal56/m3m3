@@ -1,0 +1,424 @@
+<html>
+<head>
+<title>m3m3</title>
+<link rel="shortcut icon"  type='image/x-icon' href="favicon.ico"/>
+<style>
+
+	/** Base **/
+
+	html, body {
+		font-family: 'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-size: 14px;
+		margin: 0;
+	}
+
+	body {
+		height: 68pc;
+		background: url(pattern.jfif);
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/**Navbar **/
+
+	header {
+		background-color: black;
+		color: white;
+		font-size: 16px;
+		height: 35px;
+		line-height: 28px;
+		z-index: 100;
+		position: sticky;
+   		top: 0;
+	}
+
+	header ul li.logo {
+		float: left;
+	}
+
+	header ul li.logo a {
+		font-weight: bold;
+		font-variant: all-small-caps;
+		font-family: monospace;
+		font-size: 25px;
+		letter-spacing: 5px;
+	}
+
+	header ul {
+		text-align: end;
+	}
+	
+	header ul li {
+		display: inline-block;
+		list-style-type: none;
+		padding: 0 15px;
+		text-align: center;
+		vertical-align: middle;
+		height: 35px;
+	}
+	
+	header ul li a {
+		text-decoration: none;
+		color: white;
+	}
+	
+	header ul li:hover {
+		background-color: #333333;
+	}
+
+	header ul li:active {
+		background-color: #111111;
+	}
+
+	header ul li a:visited {
+		color: white;
+	}
+
+	/**Sidebar**/
+	
+	aside {
+		width: 200px;
+		position: relative;
+		margin: 0;
+		padding: 30px 20px;
+		height: 100pc;
+		float: left;
+		position: fixed;
+		z-index: 99;
+		background: linear-gradient(-90deg, rgba(0,0,0,0.1007913507199755) 0%, rgba(0,0,0,0.2161414907759979) 100%)
+	}
+	
+	aside span.title {
+		color: black;
+		font-size: 19px;
+		text-transform: uppercase;
+	}
+
+	aside ul {
+		padding-left: 10px;
+	}
+
+	aside ul li {
+		list-style-type: none;
+		margin: 10px 0px;
+		background-color: #EEEEEE;
+		padding: 10px 12px;
+		border-radius: 5px;
+	}
+
+	aside ul li.selected {
+		font-weight: bold;
+	}
+	
+    aside ul li.upload-post {
+        color: white;
+        position: relative;
+        top: calc(100vh - 400px);
+        box-shadow: black 1px 1px 120px;
+        background-color: mediumseagreen;
+	}
+
+    aside ul li.upload-post:hover {
+        color: black;
+        background-color: lightgreen;
+	}
+	
+	aside ul li a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	aside ul li:active {
+		font-weight: bold;
+	}
+
+	aside ul li:hover {
+		background-color: #DDDDDD;
+	}
+
+	/** Main  **/
+
+	main {
+		min-height: calc(100% - 95px);
+    	text-align: center;
+    	padding: 30px;
+		width: calc(100% - 300px);
+    	float: right;
+	}
+
+	/**Article [Post]**/
+
+	article div.post-header {
+		display: flex;
+		margin-bottom: 15px;
+		margin: 10px 0px 15px 10px;
+	}
+
+	article div.post-header div.post-header-info{
+		padding-left: 20px;
+    	color: #777;
+    	margin: auto 0;
+	}
+
+	article div.post-title {
+		display: block;
+		font-size: 28px;
+		text-align: left;
+		margin-bottom: 5px;
+		margin-left: 15px;
+	}
+
+	article div.post-body, article div.post-body img, article div.post-body video {
+		width: 600px;
+	}
+
+	article div.post-info {
+		margin: 15px;
+    	color: #777;
+    	text-align: left;
+	}
+
+	article div.post-footer {
+		background-color: #f2f2f2a8;
+	}
+
+	article div.post-footer a.post-action:first-child{
+		border-left: none;
+	}
+
+	article div.post-footer a.post-action:last-child{
+		border-right: none;
+	}
+
+    /** Article detailed **/
+
+    article.detailed {
+		overflow: hidden;
+  	  	max-width: 1000px;
+		margin: 10px auto;
+		border-radius: 3px;
+		border: solid #DDD 1px;
+		background-color: white;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+	}
+
+    article.detailed div.post-main {
+        max-width: 600px;
+        float: left;
+    }
+
+    article.detailed div.post-comments {
+        float: right;
+        text-align: left;
+        width: 360px;
+        margin: 20px;
+    }
+
+    article.detailed div.post-comments div.comment {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    article.detailed div.post-comments div.comment div.comment-header{
+        display: flex;
+		margin-bottom: 15px;
+		margin: 5px 0px 5px 10px;
+    }
+
+    article.detailed div.post-comments div.comment div.comment-header-info{
+        padding-left: 20px;
+    	color: #777;
+    	margin: auto 0;
+    }
+
+    article.detailed div.post-comments div.comment div.comment-body {
+        padding-left: 20px;
+        text-align: justify;
+    }
+    
+    article.detailed div.post-comments div.comment div.comment-body img {
+        width: 300px;
+        text-align: center;
+        margin-top: 15px;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+
+    article.detailed div.post-comments div.reply {
+        margin-top: 25px;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+
+    article.detailed div.post-comments div.reply textarea.reply-box {
+        padding: 9px;
+        width: 300px;
+        resize: vertical;
+        border-radius: 5px;
+        border: 1px solid #DDDDDD;
+        background-color: #f2f2f2a8;
+    }
+
+    article.detailed div.post-comments div.reply input.reply-box:active {
+        background-color: white;
+    }
+
+    article.detailed div.post-comments div.reply input[type=file].reply-img {
+        display: none;
+    }
+
+    article.detailed div.post-comments div.reply label.reply-img {
+        float: right;
+        color: white;
+        font-size: 12px;
+        padding: 5px 8px;
+        margin-right: 8px;
+        border-radius: 5px;
+        border: 1px solid #DDDDDD;
+        background-color: mediumseagreen !important;
+    }
+
+    article.detailed div.post-comments div.reply input[type=submit].reply-submit {
+        height: 28px;
+        float: right;
+        color: white;
+        font-size: 12px;
+        padding: 5px 8px;
+        margin-right: 30px;
+        border-radius: 5px;
+        border: 1px solid #DDDDDD;
+        background-color: dodgerblue !important;
+    }
+
+	/** UI **/
+
+	a.post-action {
+		text-decoration: none;
+		border: dodgerblue 1px;
+		display: table-cell;
+		width: 120px;
+		padding: 10px;
+		box-sizing: border-box;
+		border: solid #DDD 1px;
+	}
+
+	a.post-action.facebook {
+		color: #1877F2;
+		font-weight: bolder;
+	}
+
+	a.post-action.twitter {
+		color: rgb(26, 161, 242);
+		font-weight: bolder;
+	}
+
+	/** Utilitarias **/
+	.sub {
+		font-size: 12px;
+	}
+
+	img.avatar {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+	}
+
+	img.avatar-sm {
+		width: 28px;
+		height: 28px;
+		border-radius: 10px;
+	}
+
+	.text-shadow {
+		text-shadow: #FFFFFFCC 3px 3px 3px;
+	}
+	
+	
+</style>
+</head>
+<body>
+<header>
+	<ul>
+		<li class= "logo"><a href= "index.html">m3m3</a><span class= "sub">&lt;Memes y más&gt;</span></li>
+		<li><a href= "login.html">Iniciar sesión</a></li>
+		<li><a href= "https://9gag.com/">Ayuda</a></li>
+	</ul>
+</header>
+<aside>
+	<span class= "title text-shadow">Categorias</span>
+	<ul>
+		<li class= "selected"><a href= "#">Anime</a></li>
+		<li><a href= "#">Animales</a></li>
+		<li><a href= "#">GIFs</a></li>
+		<li><a href= "#">Videos</a></li>
+		<li><a href= "#">Videojuegos</a></li>
+    </ul>
+    <ul>
+        <li class= "upload-post"><a href= "upload_post.html">Subir meme =)</a></li>
+    </ul>
+</aside>
+<main>
+	<article class= "detailed">
+        <div class="post-main">
+            <div class= "post-header">
+                <a href= "#"><img src= "pp.jpg" class= "avatar"></a>
+                <div class= "post-header-info"><b><a href= "#">hayasaca</a></b> • Hace 8 minutos</div>
+            </div> 
+            <div class="post-title">
+                mfw
+            </div>
+            <div class="post-body">
+                <img src="post.jpg" alt="">
+            </div>
+            <div class= "post-info">
+                279 me gusta • 64 comentarios
+            </div>
+            <div class="post-footer">
+                <a href= "#" class="post-action">Me gusta ♥</a>
+                <a href= "#" class="post-action">No me gusta </a>
+                <a href= "#" class="post-action">Comentar</a>
+                <a target= "_blank" href= "https://www.facebook.com/sharer.php?t=Me reí&u=me.me" class="post-action facebook">FB</a>
+                <a target= "_blank" href= "https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me" class="post-action twitter">TW</a>
+            </div>
+        </div>
+        <div class="post-comments">
+            <div class="reply">
+                <form action="comments.html">
+                    <img src= "pp3.jpg" class= "avatar" style= "padding: 5px 0px;">
+                    <textarea class= "reply-box" rows= "2"></textarea>
+                    <input type="submit" class= "reply-submit" value="Comentar">
+                    <label for="file" class="reply-img">Imagen</label>
+                    <input type="file" class= "reply-img" name= "file">
+                </form>
+            </div>
+            <div class="comment">
+                <div class="comment-header">
+                    <a href= "#"><img src= "pp2.gif" class= "avatar-sm"></a>
+                    <div class= "comment-header-info"><b><a href= "#">wubby</a></b> • Hace 1 minuto</div>
+                </div>
+                <div class="comment-body">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis natus cum sit omnis nobis fugiat dolor vel incidunt. Veniam praesentium iste aperiam porro illo incidunt commodi consequuntur suscipit assumenda ipsum!
+                </div>
+            </>
+            <div class="comment">
+                <div class="comment-header">
+                    <a href= "#"><img src= "pp.jpg" class= "avatar-sm"></a>
+                    <div class= "comment-header-info"><b><a href= "#">hayasasca</a></b> • Hace menos de 1 minuto</div>
+                </div>
+                <div class="comment-body">
+                    .tnudicni lev rolod taiguf sibon sinmo tis muc sutan siuQ .tile gnicisipida rutetcesnoc tema ,tis rolod muspi meroL
+                    <img src="comment.jpg">
+                </div>
+            </div>
+        </div>
+	</article>
+</main>
+</main>
+<footer>
+</footer>
+</body>
+<html>

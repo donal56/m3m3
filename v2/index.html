@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>m3m3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
+	<link rel="manifest" href="media/favicon/site.webmanifest">
+	<link rel="mask-icon" href="media/favicon/safari-pinned-tab.svg" color="#7b7b7b">
+	<link rel="shortcut icon" href="media/favicon/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="m3m3">
+	<meta name="application-name" content="m3m3">
+	<meta name="msapplication-TileColor" content="#00a300">
+	<meta name="msapplication-config" content="media/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#00fa9a">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/feed.css">
+
+	<!-- JS -->
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/semantic.min.js"></script>
+    <script src="js/base.js" defer></script>
+    <script src="js/global.js" defer></script>
+	<script src="js/feed.js" defer></script>
+	<script src="js/post.js" defer></script>
+</head>
+
+<body class="pushable">
+	<div class="ui left inverted vertical menu sidebar" id="sidebar">
+		<div class="item">
+			<a class="logo" href="index.html">m3m3</a>
+			<div class="logo-subtitle" href="#">&lt;Memes y más&gt;</div>
+		</div>
+		<a class="item title" href="#">
+			Categorias
+		</a>
+		<a class="item selected" data-tag="*" href="#">
+			Todo
+		</a>
+		<a class="item" data-tag="anime" href="#">
+			<i class="rocket icon"></i>
+			Anime
+		</a>
+		<a class="item" data-tag="animales" href="#">
+			<i class="paw icon"></i>
+			Animales
+		</a>
+		<a class="item" data-tag="gifs" href="#">
+			<i class="bolt icon"></i>
+			GIFs
+		</a>
+		<a class="item" data-tag="videos" href="#">
+			<i class="play icon"></i>
+			Videos
+		</a>
+		<a class="item" data-tag="wholesome" href="#">
+			<i class="star icon"></i>
+			Wholesome
+		</a>
+		<a class="item title" href="#"></a>
+		<a class= "item selected type" data-type="popular" href="#">
+			<i class="star icon"></i>
+			Popular
+		</a>
+		<a class= "item type" data-type="tendencia" href="#">
+			<i class="rocket icon"></i>
+			Tendencia
+		</a>
+		<a class= "item type" data-type="nuevo" href="#">
+			<i class="leaf icon"></i>
+			Nuevo
+		</a>
+		<a class= "item upload-post" href="upload_post.html">Subir meme ツ</a>
+	</div>
+	<div class="ui secondary pointing top fixed white menu" id="navbar">
+		<div class="ui container">
+			<div class="left menu">
+				<div class="item" id= "toogle-sidebar">
+					<i class="bars icon"></i>
+				</div>
+				<div class="item" id= "home">
+					<a href= "index.html"><i class="home icon"></i></a>
+				</div>
+			</div>
+			<div class="right menu">
+				<div class="item" id= "login"  style= "display: none">
+					<button class="compact ui right labeled icon primary button" onclick= "window.location='login.html'">
+						<i class="user icon"></i>
+						Iniciar sesión
+					</button>
+				</div>
+				<div class="item" id= "settings"  style= "display: none">
+					<button class="compact ui icon primary link button" onclick="window.location= 'settings.html'"">
+						<i class= "settings icon"></i>
+					</button>
+				</div>
+				<div class="item">
+					<button class="compact ui icon button" onclick="window.location= 'https://9gag.com/'">
+						<i class="help icon"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pusher">
+		<main>
+			<navbar>
+				<ul>
+					<li data-type="popular" class="selected"><a href="#">Popular</a></li>
+					<li data-type="tendencia"><a href="#">Tendencia</a></li>
+					<li data-type="nuevo"><a href="#">Nuevo</a></li>
+				</ul>
+			</navbar>
+
+			<article data-types="popular,tendencia" data-tags="anime">
+				<div class="ui fluid raised card">
+					<div class="content">
+						<div class="ui left floated">
+							<a href="#"><img class="ui custom avatar image" src="media/avatars/pp.jpg" onclick=""> <b> hayasaca</a></b>
+						</div>
+						<div class="right floated meta">Hace 8 minutos</div>
+					</div>
+					<div class="content post-title">
+						<div class="header">mfw</div>
+					</div>
+					<a class="image" href="comments.html">
+						<img src="media/posts/post.jpg" alt="">
+					</a>	
+					<div class="content">
+						<span class="left floated">
+							<i class="comments outline icon"></i>
+							64 comentarios
+						</span>
+						<span class="right floated">
+							<i class="thumbs up outline icon"></i>
+							279 me gusta
+						</span>
+					</div>
+					<div class="extra content">
+						<div class="ui fluid five item grid container secondary compact text options-section menu">
+							<div class="item like-button" onclick= "iconPressed(this, '.dislike-button');" data-state="0">
+								<i class="thumbs up icon"></i>
+							</div>
+							<div class="item dislike-button" onclick= "iconPressed(this, '.like-button');" data-state="0">
+								<i class="thumbs down icon"></i>
+							</div>
+							<div class="item comment-button" onclick= "window.location= 'comments.html'">
+								<i class="comments icon"></i>
+							</div>
+							<div class="item facebook-button" onclick= "window.open('https://www.facebook.com/sharer.php?t=Me reí&u=me.me')">
+								<i class="facebook icon"></i>
+							</div>
+							<div class="item twitter-button" onclick= "window.open('https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me')">
+								<i class="twitter icon"></i>
+							</div>
+						</div>
+						<div class="ui fluid container comment-section">
+							<img class="ui left floated item avatar image" src="media/avatars/pp.jpg" onclick="">
+							<form class= "ui item unstackable form" onsubmit= "return comentar(event, this)">
+								<div class="inline fields">
+									<div class="twelve wide field">
+										<input type="text" name= "comentario" class= "comment-box" 
+										placeholder= "Comenta algo gracioso..." required maxlength= "280">
+									</div>
+									<div class="field">
+										<button type= "submit" class= "ui green button">
+											<i class= "send icon"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article data-types="tendencia,nuevo" data-tags="wholesome">
+				<div class="ui fluid raised card">
+					<div class="content">
+						<div class="ui left floated">
+							<a href="#"><img class="ui custom avatar image" src="media/avatars/pp.jpg" onclick=""> <b> hayasaca</a></b>
+						</div>
+						<div class="right floated meta">Hace 13 minutos</div>
+					</div>
+					<div class="content post-title">
+						<div class="header">had a good day</div>
+					</div>
+					<a class="image" href="comments.html">
+						<img src="media/posts/post2.jpg" alt="">
+					</a>	
+					<div class="content">
+						<span class="left floated">
+							<i class="comments outline icon"></i>
+							13 comentarios
+						</span>
+						<span class="right floated">
+							<i class="thumbs up outline icon"></i>
+							29 me gusta
+						</span>
+					</div>
+					<div class="extra content">
+						<div class="ui fluid five item grid container secondary compact text options-section menu">
+							<div class="item like-button" onclick= "iconPressed(this, '.dislike-button');" data-state="0">
+								<i class="thumbs up icon"></i>
+							</div>
+							<div class="item dislike-button" onclick= "iconPressed(this, '.like-button');" data-state="0">
+								<i class="thumbs down icon"></i>
+							</div>
+							<div class="item comment-button" onclick= "window.location= 'comments.html'">
+								<i class="comments icon"></i>
+							</div>
+							<div class="item facebook-button" onclick= "window.open('https://www.facebook.com/sharer.php?t=Me reí&u=me.me')">
+								<i class="facebook icon"></i>
+							</div>
+							<div class="item twitter-button" onclick= "window.open('https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me')">
+								<i class="twitter icon"></i>
+							</div>
+						</div>
+						<div class="ui fluid container comment-section">
+							<img class="ui left floated item avatar image" src="media/avatars/pp.jpg" onclick="">
+							<form class= "ui item unstackable form" onsubmit= "return comentar(event, this)">
+								<div class="inline fields">
+									<div class="twelve wide field">
+										<input type="text" name= "comentario" class= "comment-box" 
+										placeholder= "Comenta algo gracioso..." required maxlength= "280">
+									</div>
+									<div class="field">
+										<button type= "submit" class= "ui green button">
+											<i class= "send icon"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<article data-types="nuevo,popular" data-tags="videos,wholesome,animales">
+				<div class="ui fluid raised card">
+					<div class="content">
+						<div class="ui left floated">
+							<a href="#"><img class="ui custom avatar image" src="media/avatars/pp.jpg" onclick=""> <b> hayasaca</a></b>
+						</div>
+						<div class="right floated meta">Hace 20 minutos</div>
+					</div>
+					<div class="content post-title">
+						<div class="header">LOL ded</div>
+					</div>
+					<video src="media/posts/post3.webm" controls>
+					</video>
+					<div class="content">
+						<span class="left floated">
+							<i class="comments outline icon"></i>
+							153 comentarios
+						</span>
+						<span class="right floated">
+							<i class="thumbs up outline icon"></i>
+							66 me gusta
+						</span>
+					</div>
+					<div class="extra content">
+						<div class="ui fluid five item grid container secondary compact text options-section menu">
+							<div class="item like-button" onclick= "iconPressed(this, '.dislike-button');" data-state="0">
+								<i class="thumbs up icon"></i>
+							</div>
+							<div class="item dislike-button" onclick= "iconPressed(this, '.like-button');" data-state="0">
+								<i class="thumbs down icon"></i>
+							</div>
+							<div class="item comment-button" onclick= "window.location= 'comments.html'">
+								<i class="comments icon"></i>
+							</div>
+							<div class="item facebook-button" onclick= "window.open('https://www.facebook.com/sharer.php?t=Me reí&u=me.me')">
+								<i class="facebook icon"></i>
+							</div>
+							<div class="item twitter-button" onclick= "window.open('https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me')">
+								<i class="twitter icon"></i>
+							</div>
+						</div>
+						<div class="ui fluid container comment-section">
+							<img class="ui left floated item avatar image" src="media/avatars/pp.jpg" onclick="">
+							<form class= "ui item unstackable form" onsubmit= "return comentar(event, this)">
+								<div class="inline fields">
+									<div class="twelve wide field">
+										<input type="text" name= "comentario" class= "comment-box" 
+										placeholder= "Comenta algo gracioso..." required maxlength= "280">
+									</div>
+									<div class="field">
+										<button type= "submit" class= "ui green button">
+											<i class= "send icon"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</main>
+	</div>
+</body>
+<html>

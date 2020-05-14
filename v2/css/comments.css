@@ -1,0 +1,23 @@
+.actions {
+    padding-top: 3px;
+}
+
+@media only screen and (max-width: 606px) {
+    .form .fields .ten.wide.field {
+        width: 140px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .one-form.container .large.card, .one-form.container .large.card .image, .comments{
+        max-height: 100%;
+    }
+}
+
+.comments:not(.icon) {
+    padding-right: 15px;
+    overflow-y: auto;
+    max-height: 600px;
+    height: 100%;
+    padding-bottom: 10px;
+}

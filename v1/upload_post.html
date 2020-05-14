@@ -1,0 +1,288 @@
+<html>
+
+<head>
+    <title>m3m3</title>
+    <link rel="shortcut icon" type='image/x-icon' href="favicon.ico" />
+    <style>
+        /** Base **/
+
+        html,
+        body {
+            font-family: 'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        body {
+            height: 100%;
+            background: url(pattern.jfif);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /**Navbar **/
+
+        header {
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            height: 35px;
+            line-height: 28px;
+            z-index: 100;
+            position: sticky;
+            top: 0;
+        }
+
+        header ul li.logo {
+            float: left;
+        }
+
+        header ul li.logo a {
+            font-weight: bold;
+            font-variant: all-small-caps;
+            font-family: monospace;
+            font-size: 25px;
+            letter-spacing: 5px;
+        }
+
+        header ul {
+            text-align: end;
+        }
+
+        header ul li {
+            display: inline-block;
+            list-style-type: none;
+            padding: 0 15px;
+            text-align: center;
+            vertical-align: middle;
+            height: 35px;
+        }
+
+        header ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        header ul li:hover {
+            background-color: #333333;
+        }
+
+        header ul li:active {
+            background-color: #111111;
+        }
+
+        header ul li a:visited {
+            color: white;
+        }
+
+        /** Main  **/
+
+        main {
+            min-height: calc(100% - 95px);
+            text-align: center;
+            padding: 30px;
+            width: calc(100% - 300px);
+            float: right;
+        }
+
+        /**Login**/
+
+        div.upload-form {
+            width: 300px;
+            height: 400px;
+            margin: 100px auto;
+            padding: 20px 50px;
+            border-radius: 3px;
+            border: solid rgba(30, 143, 255, 0.2) 1px;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+            
+        }
+
+        div.upload-form h1 {
+            font-size: 28px;
+            text-align: left;
+            font-weight: 400;
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 10px;
+        }
+
+        div.upload-form input, div.upload-form select {
+            display: block;
+            padding: 9px;
+            border-radius: 3px;
+            width: 300px;
+            border: 1px solid #DDDDDD;
+            background-color: #f2f2f2a8;
+        }
+
+        div.upload-form div.input-group {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        div.upload-form label {
+            font-size: 10px;
+            color: #8a8383;
+            font-weight: 500;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        div.upload-form textarea.post-desc {
+            padding: 9px;
+            width: 300px;
+            resize: vertical;
+            border-radius: 5px;
+            border: 1px solid #DDDDDD;
+            background-color: #f2f2f2a8;
+        }
+
+        div.upload-form textarea.post-desc:active {
+            background-color: white;
+        }
+
+        div.upload input[type=file].post-img {
+            display: none;
+        }
+
+        div.upload label.post-img {
+            float: right;
+            color: white;
+            font-size: 12px;
+            padding: 5px 8px;
+            margin-right: 8px;
+            border-radius: 5px;
+            border: 1px solid #DDDDDD;
+            background-color: mediumseagreen !important;
+        }
+
+        div.upload input[type=submit].post-submit {
+            height: 28px;
+            float: right;
+            color: white;
+            font-size: 12px;
+            padding: 5px 8px;
+            margin-right: 30px;
+            border-radius: 5px;
+            border: 1px solid #DDDDDD;
+            background-color: dodgerblue !important;
+        }
+
+        /** UI **/
+
+        input[type=submit] {
+            font-size: 12px;
+            color: white;
+            background-color: dodgerblue !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px !important;
+        }
+
+        hr {
+            border: none;
+            border-bottom: 1px solid #CCC;
+        }
+
+        div.input-group {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        div.hr-with-text {
+            border: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #CCC;
+            text-align: center; 
+            margin: 10px 0 20px; 
+            line-height: 0.1em;
+        }
+
+        div.hr-with-text span { 
+            background:#fff; 
+            padding:0 10px; 
+            font-size: 10px;
+            color: #8a8383;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /** Utilitarias **/
+        .sub {
+            font-size: 12px;
+        }
+
+        img.avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .text-shadow {
+            text-shadow: #FFFFFFCC 3px 3px 3px;
+        }
+
+        .subtitle {
+            font-size: 9px !important;
+            margin-top: 3px !important;
+            padding-bottom: 15px !important;
+            float: right !important;
+            text-transform: lowercase !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li class="logo"><a href="index.html">m3m3</a><span class="sub">&lt;Memes y más&gt;</span></li>
+            <li><a href="login.html">Iniciar sesión</a></li>
+            <li><a href="https://9gag.com/">Ayuda</a></li>
+        </ul>
+    </header>
+    </main>
+        <div class="upload-form">
+            <form action="index.html" method="post">
+                <img src= "pp3.jpg" class= "avatar">
+                <h1>Subir publicación</h1>
+                <hr>
+                <form action="index.html">
+                    <div class="input-group">
+                        <label for="desc">Título</label>
+                        <textarea name= "desc" class= "post-desc" rows= "2" required maxlength= "300"></textarea>
+                        <label class= "subtitle">Max. 300 carácteres</label>
+                    </div>
+                    <div class="input-group">
+                        <label for="file" class="post-img">Imagen o video</label>
+                        <input type="file" required class= "post-img" name= "file">
+                    </div>
+                    <div class="input-group">
+                        <label for="tags">Etiquetas</label>
+                        <select required name= "tags" multiple>
+                            <option>Volvo</option>
+                            <option>Animales</option>
+                            <option>Comida</option>
+                            <option>Videojuegos</option>
+                          </select>
+                    </div>
+                    <input type="submit" value="Publicar">
+                </form>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+<html>

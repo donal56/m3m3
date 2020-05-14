@@ -1,0 +1,141 @@
+/**Sidebar**/
+
+/* @media only screen and (min-width: 767px) {
+	#toogle-sidebar {
+		display: none;
+	}
+} */
+
+div.logo-subtitle {
+	font-size: 12px;
+	text-transform: uppercase !important;
+	letter-spacing: 1px;
+}
+
+.item.selected {
+	font-weight: bold !important;
+    background-color: #272727 !important;
+}
+
+.pushable .sidebar .item.type.selected {
+	color: white !important;
+}
+
+.pushable .sidebar .item.type {
+	margin: 5px; 
+	width: 240px; 
+	color: black !important;
+    font-weight: 600 !important;
+	border-radius: 5px !important; 
+    transition: filter 0.3s ease-in !important;
+}
+
+.pushable .sidebar .item.type[data-type=popular] {
+    background: linear-gradient(45deg, deeppink, aliceblue)!important;
+}
+
+.pushable .sidebar .item.type[data-type=tendencia] {
+    background: linear-gradient(45deg, teal, blueviolet)!important;
+}
+
+.pushable .sidebar .item.type[data-type=nuevo] {
+    background: linear-gradient(45deg, tomato, beige)!important;
+}
+
+.pushable .sidebar .item.type:hover {
+	filter: hue-rotate(45deg)
+}
+
+body.pushable div.sidebar a.item.upload-post {
+	left: 10px; 
+	bottom: 10px;
+	width: 240px; 
+    position: fixed;
+	color: white !important;
+    font-weight: 600 !important;
+	border-radius: 5px !important; 
+	box-shadow: -1px -9px 10px 15px #00000088;
+    transition: color 1s ease-out, background 1s ease-out !important;
+    background: linear-gradient(45deg, mediumspringgreen  0%, mediumspringgreen  100%) !important;
+}
+
+body.pushable div.sidebar a.item.upload-post:hover {
+	color: black !important;
+	background: linear-gradient(-45deg, rgb(172, 172, 113) 50%, mediumseagreen 100%) !important
+}
+
+/** Navbar **/
+
+navbar ul {
+	padding: 0;
+}
+
+navbar ul li {
+	list-style-type: none;
+	padding: 8px 12px;
+	margin: 30px 3vw;
+	text-transform: uppercase;
+	display: inline-block;
+	letter-spacing: 0.7px;
+	background-color: #EEEEEE;
+}
+
+navbar ul li.selected {
+	background-color: dodgerblue;
+}
+
+navbar ul li.selected a, navbar ul li.selected a:hover {
+	font-weight: 500;
+	color: white;
+}
+
+navbar ul li a {
+	text-decoration: none;
+	color: #777;
+}
+
+navbar ul li:not(.selected):hover {
+	background-color: #DDDDDD;
+	color: dodgerblue;
+}
+
+/**Article [Post]**/
+
+article {
+	width: 45vw;
+	margin: 10px auto;
+	border-radius: 3px;
+	border: solid #DDD 1px;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+}
+
+@media only screen and (max-width: 767px) {
+	article, article div.post-body, article div.post-body img, article div.post-body video, article div.post-footer {
+		width: 85vw !important;
+	}
+	
+	article div.comment-section {
+	    display: none !important;
+	}
+}
+
+article div.post-title {
+	text-align: left;
+	border-top: none !important;
+	font-size: 22px !important;
+	padding: 5px 22px !important;
+	text-transform: lowercase;
+}
+
+article div.post-body, article div.post-body img, article div.post-body video {
+	width: 45vw;
+}
+
+article div.comment-section {
+	padding-top: 15px;
+}
+
+article div.comment-section input.comment-box {
+    margin-right: 10px !important;
+}

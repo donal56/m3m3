@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>m3m3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
+	<link rel="manifest" href="media/favicon/site.webmanifest">
+	<link rel="mask-icon" href="media/favicon/safari-pinned-tab.svg" color="#7b7b7b">
+	<link rel="shortcut icon" href="media/favicon/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="m3m3">
+	<meta name="application-name" content="m3m3">
+	<meta name="msapplication-TileColor" content="#00a300">
+	<meta name="msapplication-config" content="media/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#00fa9a">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/comments.css">
+
+	<!-- JS -->
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/semantic.min.js"></script>
+	<script src="js/base.js" defer></script>
+	<script src="js/global.js" defer></script>
+	<script src="js/post.js" defer></script>
+</head>
+
+<body>
+	<div class="ui secondary pointing top fixed white menu" id="navbar">
+		<div class="ui container">
+			<div class="left menu">
+				<div class="item" id="toogle-sidebar">
+					<i class="bars icon"></i>
+				</div>
+				<div class="item" id="home">
+					<a href="index.html"><i class="home icon"></i></a>
+				</div>
+			</div>
+			<div class="right menu">
+				<div class="item" id= "login"  style= "display: none">
+					<button class="compact ui right labeled icon primary button" onclick= "window.location='login.html'">
+						<i class="user icon"></i>
+						Iniciar sesión
+					</button>
+				</div>
+				<div class="item" id= "settings" style= "display: none">
+					<button class="compact ui icon primary link button" onclick="window.location= 'settings.html'"">
+						<i class= "settings icon"></i>
+					</button>
+				</div>
+				<div class="item">
+					<button class="compact ui icon button" onclick="window.location= 'https://9gag.com/'">
+						<i class="help icon"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<main>
+		<div class="ui one-form container">
+			<div class="ui raised blue large contained card">
+				<div class="content">
+					<div class="ui left floated">
+						<a href="#"><img class="ui custom avatar image" src="media/avatars/pp.jpg" onclick=""> <b>
+								hayasaca</a></b>
+					</div>
+					<div class="right floated meta">Hace 8 minutos</div>
+				</div>
+				<div class="content post-title">
+					<div class="header">mfw</div>
+				</div>
+				<div class="ui stackable grid">
+					<div class="eight wide column">
+						<img class="ui image" src="media/posts/post.jpg" alt="">
+						<div class="post-info">
+							279 me gusta • 64 comentarios
+							<div class="ui fluid five item grid container secondary compact text options-section menu">
+								<div class="item like-button" onclick="iconPressed(this, '.dislike-button');"
+									data-state="0">
+									<i class="thumbs up icon"></i>
+								</div>
+								<div class="item dislike-button" onclick="iconPressed(this, '.like-button');"
+									data-state="0">
+									<i class="thumbs down icon"></i>
+								</div>
+								<div class="item comment-button">
+									<i class="comments icon"></i>
+								</div>
+								<div class="item facebook-button"
+									onclick="window.open('https://www.facebook.com/sharer.php?t=Me reí&u=me.me')">
+									<i class="facebook icon"></i>
+								</div>
+								<div class="item twitter-button"
+									onclick="window.open('https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me')">
+									<i class="twitter icon"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="eight wide column">
+						<div class="ui fluid container">
+							<img class="ui left floated item avatar image" src="media/avatars/pp.jpg" onclick="">
+							<form class="ui item unstackable form" onsubmit="return comentar(event, this)">
+								<div class="inline fields">
+									<div class="ten wide field">
+										<textarea name="comentario" rows= "1" required maxlength="280"></textarea>
+									</div>
+									<div class="field">
+										<a class="ui teal button"><i class="camera icon"></i></a>
+									</div>
+									<div class="field">
+										<button type="submit" class="ui blue button">
+											<i class="send icon"></i>
+										</button>
+									</div>
+									<input type="file" name="imagen" class= "hidden">
+								</div>
+							</form>
+						</div>
+						<div class="ui comments">
+							<div class="comment">
+								<a class="avatar">
+									<img src="media/avatars/pp2.gif">
+								</a>
+								<div class="content">
+									<a class="author">wubby</a>
+									<div class="metadata">
+										<span class="date">Hace 10 minutos</span>
+									</div>
+									<div class="text">
+										<p>ya bajale</p>
+									</div>
+									<img class= "ui rounded image" src="media/comments/comment.jpg">
+									<div class="actions">
+										<a>32pts </a>
+										<a href= "#"><i class="arrow up icon"></i></a>
+										<a href= "#"><i class="arrow down icon"></i></a>
+										<a href= "#"><i class="ellipsis horizontal icon"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a class="avatar">
+									<img src="media/avatars/pp.jpg">
+								</a>
+								<div class="content">
+									<a class="author" href= "#">hayasasca</a>
+									<div class="metadata">
+										<span class="date">Hace 12 minutos</span>
+									</div>
+									<div class="text">
+										<p>haha lorem ipsum</p>
+									</div>
+									<div class="actions">
+										<a>5pts </a>
+										<a href= "#"><i class="arrow up icon"></i></a>
+										<a href= "#"><i class="arrow down icon"></i></a>
+										<a href= "#"><i class="ellipsis horizontal icon"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a class="avatar">
+									<img src="media/avatars/pp.jpg">
+								</a>
+								<div class="content">
+									<a class="author" href= "#">hayasasca</a>
+									<div class="metadata">
+										<span class="date">Hace 8 minutos</span>
+									</div>
+									<div class="text">
+										<p>I met a traveller from an antique land,
+										Who said—“Two vast and trunkless legs of stone
+										Stand in the desert. . . . Near them, on the sand,
+										Half sunk a shattered visage lies, whose frown,
+										And wrinkled lip, and sneer of cold command,
+										Tell that its sculptor well those passions read
+										Which yet survive, stamped on these lifeless things,
+										The hand that mocked them, and the heart that fed;
+										And on the pedestal, these words appear:
+										My name is Ozymandias, King of Kings;
+										Look on my Works, ye Mighty, and despair!
+										Nothing beside remains. Round the decay
+										Of that colossal Wreck, boundless and bare
+										The lone and level sands stretch far away.”</p>
+									</div>
+									<div class="actions">
+										<a>5pts </a>
+										<a href= "#"><i class="arrow up icon"></i></a>
+										<a href= "#"><i class="arrow down icon"></i></a>
+										<a href= "#"><i class="ellipsis horizontal icon"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="comment">
+								<a class="avatar">
+									<img src="media/avatars/pp3.jpg">
+								</a>
+								<div class="content">
+									<a class="author" href= "#">croquette</a>
+									<div class="metadata">
+										<span class="date">Hace menos de 1 minuto</span>
+									</div>
+									<div class="text">
+										<p></p>
+									</div>
+									<img class= "ui rounded image" src="media/comments/comment2.jpg">
+									<div class="actions">
+										<a>5pts </a>
+										<a href= "#"><i class="arrow up icon"></i></a>
+										<a href= "#"><i class="arrow down icon"></i></a>
+										<a href= "#"><i class="ellipsis horizontal icon"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</main>
+</body>
+<html>

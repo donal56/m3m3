@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>m3m3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
+    <link rel="manifest" href="media/favicon/site.webmanifest">
+    <link rel="mask-icon" href="media/favicon/safari-pinned-tab.svg" color="#7b7b7b">
+    <link rel="shortcut icon" href="media/favicon/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="m3m3">
+    <meta name="application-name" content="m3m3">
+    <meta name="msapplication-TileColor" content="#00a300">
+    <meta name="msapplication-config" content="media/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#00fa9a">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+
+    <!-- JS -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/semantic.min.js"></script>
+    <script src="js/base.js" defer></script>
+    <script src="js/global.js" defer></script>
+    <script src="js/settings.js" defer></script>
+</head>
+
+<body>
+    <div class="ui secondary pointing top fixed white menu" id="navbar">
+        <div class="ui container">
+            <div class="left menu">
+                <div class="item" id="toogle-sidebar">
+                    <i class="bars icon"></i>
+                </div>
+                <div class="item" id="home">
+                    <a href="index.html"><i class="home icon"></i></a>
+                </div>
+            </div>
+            <div class="right menu">
+                <div class="item" id="login" style="display: none">
+                    <button class="compact ui right labeled icon primary button" onclick= "window.location='login.html'">
+						<i class="user icon"></i>
+						Iniciar sesión
+					</button>
+                </div>
+                <div class="item" id="settings" style="display: none">
+                    <button class="compact ui icon primary link button" onclick="window.location= 'settings.html'"">
+						<i class= " settings icon"></i>
+                    </button>
+                </div>
+                <div class="item">
+                    <button class="compact ui icon button" onclick="window.location= 'https://9gag.com/'">
+                        <i class="help icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="ui one-form container">
+            <div class="ui raised green medium card">
+                <div class="content">
+                    <div class="fluid container">
+                        <img class="left floated avatar" src="media/avatars/pp3.jpg">
+                        <div class="header">Configuración</div>
+                    </div>
+                    <div class="ui top attached tabular menu" style="padding-top: 10px">
+                        <a class="active item" data-tab="usuario">Cuenta</a>
+                        <a class="item" data-tab="persona">Datos personales</a>
+                        <a class="item" data-tab="contraseña">Cambiar contraseña</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="usuario">
+                        <form class="ui equal width form" id="w0">
+                            <div class="field">
+                                <label for="username">Nombre de usuario</label>
+                                <input type="text" name="username" value="croquette">
+                            </div>
+                            <div class="field">
+                                <label for="avatar">Foto de perfil</label>
+                                <input type="file" name="avatar">
+                            </div>
+                            <div class="field">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" name="email" value="croquette56@hotmail.com">
+                            </div>
+                            <div class="field">
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="nsfw" checked="checked">
+                                    <label>Ver contenido NSFW</label>
+                                </div>
+                            </div>
+                            <div class="ui indicating small blue progress hidden">
+                                <div class="bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="label"></div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <button type="submit" class="ui blue fluid button">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                                <div class="field">
+                                    <button type="button" class="ui gray fluid button" onclick="cerrarSesion()">
+                                        Cerrar sesión
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ui error message field"></div>
+                        </form>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="persona">
+                        <form class="ui equal width form" id="w1">
+                            <div class="field">
+                                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                                <input type="date" name="fechaNacimiento" value="1998-06-22">
+                            </div>
+                            <div class="field">
+                                <label for="pais">País</label>
+                                <div class="ui search selection dropdown">
+                                    <input type="hidden" name="pais">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">--Seleccione un país--</div>
+                                    <div class="menu">
+                                        <option class="item" data-value="sa"><i class="sa flag"></i>Arabia Saudita
+                                        </option>
+                                        <option class="item" data-value="de"><i class="de flag"></i>Alemania</option>
+                                        <option class="item" data-value="ar"><i class="ar flag"></i>Argentina</option>
+                                        <option class="item" data-value="au"><i class="au flag"></i>Australia</option>
+                                        <option class="item" data-value="at"><i class="at flag"></i>Austria</option>
+                                        <option class="item" data-value="bo"><i class="bo flag"></i>Bolivia</option>
+                                        <option class="item" data-value="br"><i class="br flag"></i>Brasil</option>
+                                        <option class="item" data-value="ca"><i class="ca flag"></i>Cánada</option>
+                                        <option class="item" data-value="cl"><i class="cl flag"></i>Chile</option>
+                                        <option class="item" data-value="cn"><i class="cn flag"></i>China</option>
+                                        <option class="item" data-value="va"><i class="va flag"></i>Ciudad del Vaticano
+                                        </option>
+                                        <option class="item" data-value="co"><i class="co flag"></i>Colombia</option>
+                                        <option class="item" data-value="kr"><i class="kr flag"></i>Corea del Sur
+                                        </option>
+                                        <option class="item" data-value="cr"><i class="cr flag"></i>Costa Rica</option>
+                                        <option class="item" data-value="cu"><i class="cu flag"></i>Cuba</option>
+                                        <option class="item" data-value="dk"><i class="dk flag"></i>Dinamarca</option>
+                                        <option class="item" data-value="ec"><i class="ec flag"></i>Ecuador</option>
+                                        <option class="item" data-value="eg"><i class="eg flag"></i>Egipto</option>
+                                        <option class="item" data-value="sv"><i class="sv flag"></i>El Salvador</option>
+                                        <option class="item" data-value="ae"><i class="ae flag"></i>Emirates Arabes
+                                            Unidos</option>
+                                        <option class="item" data-value="us"><i class="us flag"></i>Estados Unidos
+                                        </option>
+                                        <option class="item" data-value="fi"><i class="fi flag"></i>Finlandia</option>
+                                        <option class="item" data-value="ph"><i class="ph flag"></i>Filipinas</option>
+                                        <option class="item" data-value="fr"><i class="fr flag"></i>Francia</option>
+                                        <option class="item" data-value="gt"><i class="gt flag"></i>Guatemala</option>
+                                        <option class="item" data-value="ht"><i class="ht flag"></i>Haiti</option>
+                                        <option class="item" data-value="hn"><i class="hn flag"></i>Honduras</option>
+                                        <option class="item" data-value="in"><i class="in flag"></i>India</option>
+                                        <option class="item" data-value="id"><i class="id flag"></i>Indonesia</option>
+                                        <option class="item" data-value="gb"><i class="gb flag"></i>Inglaterra</option>
+                                        <option class="item" data-value="ir"><i class="ir flag"></i>Iran</option>
+                                        <option class="item" data-value="iq"><i class="iq flag"></i>Iraq</option>
+                                        <option class="item" data-value="ie"><i class="ie flag"></i>Irlanda</option>
+                                        <option class="item" data-value="il"><i class="il flag"></i>Israel</option>
+                                        <option class="item" data-value="it"><i class="it flag"></i>Italia</option>
+                                        <option class="item" data-value="jm"><i class="jm flag"></i>Jamaica</option>
+                                        <option class="item" data-value="jp"><i class="jp flag"></i>Japan</option>
+                                        <option class="item" data-value="kz"><i class="kz flag"></i>Kazakhstan</option>
+                                        <option class="item" data-value="ke"><i class="ke flag"></i>Kenia</option>
+                                        <option class="item" data-value="kw"><i class="kw flag"></i>Kuwait</option>
+                                        <option class="item" data-value="lu"><i class="lu flag"></i>Luxemburgo</option>
+                                        <option class="item" data-value="mg"><i class="mg flag"></i>Madagascar</option>
+                                        <option class="item" data-value="my"><i class="my flag"></i>Malasia</option>
+                                        <option class="item selected" data-value="mx"><i class="mx flag"></i>México
+                                        </option>
+                                        <option class="item" data-value="pg"><i class="pg flag"></i>Nueva Guinea
+                                        </option>
+                                        <option class="item" data-value="nz"><i class="nz flag"></i>Nueva Zelanda
+                                        </option>
+                                        <option class="item" data-value="ni"><i class="ni flag"></i>Nicaragua</option>
+                                        <option class="item" data-value="ng"><i class="ng flag"></i>Nigeria</option>
+                                        <option class="item" data-value="no"><i class="no flag"></i>Noruega</option>
+                                        <option class="item" data-value="om"><i class="om flag"></i>Oman</option>
+                                        <option class="item" data-value="nl"><i class="nl flag"></i>Países Bajos
+                                        </option>
+                                        <option class="item" data-value="pk"><i class="pk flag"></i>Pakistan</option>
+                                        <option class="item" data-value="pa"><i class="pa flag"></i>Panamá</option>
+                                        <option class="item" data-value="py"><i class="py flag"></i>Paraguay</option>
+                                        <option class="item" data-value="pe"><i class="pe flag"></i>Perú</option>
+                                        <option class="item" data-value="pl"><i class="pl flag"></i>Polonia</option>
+                                        <option class="item" data-value="pt"><i class="pt flag"></i>Portugal</option>
+                                        <option class="item" data-value="pr"><i class="pr flag"></i>Puerto Rico</option>
+                                        <option class="item" data-value="qa"><i class="qa flag"></i>Qatar</option>
+                                        <option class="item" data-value="cz"><i class="cz flag"></i>Republica Checa
+                                        </option>
+                                        <option class="item" data-value="do"><i class="do flag"></i>Republica Dominicana
+                                        </option>
+                                        <option class="item" data-value="ro"><i class="ro flag"></i>Romania</option>
+                                        <option class="item" data-value="ru"><i class="ru flag"></i>Rusia</option>
+                                        <option class="item" data-value="sm"><i class="sm flag"></i>San Marino</option>
+                                        <option class="item" data-value="sg"><i class="sg flag"></i>Singapur</option>
+                                        <option class="item" data-value="za"><i class="za flag"></i>Sudafrica</option>
+                                        <option class="item" data-value="es"><i class="es flag"></i>España</option>
+                                        <option class="item" data-value="se"><i class="se flag"></i>Suecia</option>
+                                        <option class="item" data-value="sz"><i class="sz flag"></i>Suiza</option>
+                                        <option class="item" data-value="tw"><i class="tw flag"></i>Taiwan</option>
+                                        <option class="item" data-value="th"><i class="th flag"></i>Tailandia</option>
+                                        <option class="item" data-value="ug"><i class="ug flag"></i>Uganda</option>
+                                        <option class="item" data-value="ua"><i class="ua flag"></i>Ucrania</option>
+                                        <option class="item" data-value="uy"><i class="uy flag"></i>Uruguay</option>
+                                        <option class="item" data-value="uz"><i class="uz flag"></i>Uzbekistan</option>
+                                        <option class="item" data-value="ve"><i class="ve flag"></i>Venezuela</option>
+                                        <option class="item" data-value="vn"><i class="vn flag"></i>Vietnam</option>
+                                        <option class="item" data-value="zm"><i class="zm flag"></i>Zambia</option>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline fields">
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="genero" value="1" checked="checked">
+                                        <label>Hombre</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="genero" value="0">
+                                        <label>Mujer</label>
+                                    </div>
+                                </div>
+								<div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="genero" value="">
+                                        <label>Otro</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui indicating small blue progress hidden">
+                                <div class="bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="label"></div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <button type="submit" class="ui blue fluid button">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                                <div class="field">
+                                    <button type="button" class="ui gray fluid button" onclick="cerrarSesion()">
+                                        Cerrar sesión
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ui error message field"></div>
+                        </form>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="contraseña">
+                        <form class="ui equal width form" id="w2">
+                            <div class="field">
+                                <label for="password">Nueva contraseña</label>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="field">
+                                <label for="repeatPassword">Repetir contraseña</label>
+                                <input type="password" name="repeatPassword">
+                            </div>
+                            <div class="ui indicating small blue progress hidden">
+                                <div class="bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="label"></div>
+                            </div>
+                            <div class="two fields">
+                                <div class="field">
+                                    <button type="submit" class="ui blue fluid button">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                                <div class="field">
+                                    <button type="button" class="ui gray fluid button" onclick="cerrarSesion()">
+                                        Cerrar sesión
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ui error message field"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</body>
+<html>

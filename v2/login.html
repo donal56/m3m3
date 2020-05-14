@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>m3m3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
+    <link rel="manifest" href="media/favicon/site.webmanifest">
+    <link rel="mask-icon" href="media/favicon/safari-pinned-tab.svg" color="#7b7b7b">
+    <link rel="shortcut icon" href="media/favicon/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="m3m3">
+    <meta name="application-name" content="m3m3">
+    <meta name="msapplication-TileColor" content="#00a300">
+    <meta name="msapplication-config" content="media/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#00fa9a">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <!-- JS -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/semantic.min.js"></script>
+    <script src="js/base.js" defer></script>
+    <script src="js/login.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <div class="logo hoverable">
+            <a href="index.html">m3m3</a>
+        </div>
+        <div class="ui one-form container">
+            <div class="ui raised blue small card">
+                <div class="content">
+                    <div class="center aligned header">Iniciar sesión</div>
+                    <div class="description">
+                        <form class="ui equal width form" id="w0">
+                            <div class="field">
+                                <label for="email">Correo electrónico</label>
+                                <input name="email"
+                            </div>
+                            <div class="field">
+                                <label for="password">Contraseña</label>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="field">
+                                <button type="submit" class="ui blue fluid button">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                            <div class="ui error message field"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui social container">
+                        <div class="ui horizontal divider">
+                            O inicie vinculado con:
+                        </div>
+                        <div class="container">
+                            <button class="ui left floated facebook button"
+                                onclick="window.open('https://facebook.com')">
+                                <i class="facebook icon"></i>
+                                Facebook
+                            </button>
+                            <button class="ui right floated twitter button"
+                                onclick="window.open('https://twitter.com')">
+                                <i class="twitter icon"></i>
+                                Twitter
+                            </button>
+                        </div>
+                    </div>
+					<div class="ui container">
+                        <div class="ui horizontal divider" style= "padding-top: 10px">
+                            ¿No tiene cuenta o redes sociales?
+                        </div>
+                        <div class="container">
+                            <button class="ui fluid button"
+                                onclick="window.location= 'register.html'">
+                                Crear cuenta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<html>
