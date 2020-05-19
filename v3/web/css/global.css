@@ -1,0 +1,244 @@
+/** Base elements **/
+
+html, body {
+	font-family: 'Helvetica Neue', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 14px;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+main {
+	padding: 30px;
+	margin: 0 auto;
+}
+
+video {
+	object-fit: cover;
+}
+
+textarea {
+	resize: vertical;
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+	background-color: #EEEEEE66 !important;
+}
+
+button.link.button a,  button.link.button a:hover button.link.button a:visited, button.link.button a:active {
+	color: unset;
+}
+
+/** Library global overrides **/
+
+.divider {
+    font-size: 12px !important;
+    color: gray !important;
+}
+
+/** Main content **/
+
+body.pushable div.pusher, body:not(.pushable) main {
+	background: url(../bg.jpg) !important;
+}
+
+body.pushable main {
+	text-align: center;
+	width: calc(100vw - 260px);
+	margin-left: 260px;
+}
+
+body:not(.pushable) main {
+	width: 100%;
+	min-height: 100%;
+}
+
+body:not(.pushable) #toogle-sidebar {
+	display: none;
+	visibility: hidden;
+}
+
+body.pushable #home {
+	display: none;
+	visibility: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+	body.pushable main {
+		width: 100vw;
+		margin-left: 0px;
+	}
+}
+
+/** Logo**/
+
+.logo {
+	font-weight: bold !important;
+	font-variant: all-small-caps;
+	font-family: monospace;
+	font-size: 60px;
+	letter-spacing: 10px;
+	transition: font-size ease-in-out 0.3s;
+}
+		
+.logo.hoverable:hover {
+	font-size: 85px;
+	text-decoration: underline;
+	filter: drop-shadow(7px 5px 30px #000000DF);
+}
+
+.logo a, .logo a:hover, .logo a:active, .logo a:visited {
+	color: blacK;
+}
+
+/** Reglas globales complementarias **/
+
+/* Pantallas de un solo formulario */
+
+.one-form.container {
+    margin-top: 6vh;	
+}
+
+.one-form.container .card {	
+	margin: auto;
+    display: block;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+}
+
+.one-form.container .small.card {
+    width: 360px;
+}
+
+.one-form.container .medium.card {
+	width: 500px;
+}
+
+.one-form.container .big.card {
+	width: 700px;
+}
+
+.one-form.container .large.card {
+	width: 900px;
+}
+
+@media only screen and (max-width: 500px) {
+    .one-form.container .small.card {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .one-form.container .medium.card {
+        width: 400px;
+    }
+}
+
+.one-form.container .card .header {
+	font-size: 30px;
+	text-align: left;
+	font-weight: 400;
+	display: inline-block;
+	margin-left: 10px;
+    margin-bottom: 10px;
+    padding-top: 4px;
+}
+
+@media only screen and (max-width: 400px) {
+    .one-form.container .card .header {
+        font-size: 20px;
+    }
+}
+
+.one-form.container .card .extra.content {
+    border-top: none !important;
+}
+
+/* Menu de opciones */
+
+.options-section.menu .item {
+	background-color: #BBB  !important;
+}
+
+.options-section.menu div.item {
+	padding: 7px 0px !important;
+    transition: all 0.2s ease !important;
+}
+
+.options-section.menu div.item:hover {
+	font-size: 22px;
+}
+
+.options-section.menu div a, div.options-section.menu div {
+	color: white !important;
+}
+
+.options-section.menu .item.like-button {
+	background-color: #11DD00DF !important;
+	border-radius: .28571429rem 0 0 .28571429rem !important;
+}
+
+.options-section.menu .item.dislike-button {
+	background-color: #FF0000DF !important;
+}
+
+.options-section.menu .item.comment-button {
+	background-color: #FA5A50DF !important;
+}
+
+.options-section.menu .item.facebook-button {
+	background-color: #1877F2DF !important;
+}
+
+.options-section.menu .item.twitter-button {
+	background-color: rgb(26, 161, 242) !important;
+}
+
+/* Informacion añadida en inputs */
+
+.field.info {
+	color: #777 !important;
+	font-size: 10px !important;
+	margin-top: 3px !important;
+	padding-bottom: 15px !important;
+	float: right !important;
+	text-transform: lowercase !important;
+}
+
+/* Posts */
+
+.post-info {
+	margin: 15px;
+	color: #777;
+	text-align: left;
+}
+
+/** Utilitarias **/
+
+img.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+}
+
+img.custom.avatar {
+	width: 40px !important;
+	height: 40px !important;
+	border-radius: 10px !important;
+	border: 1px solid #EEEEEE;
+}
+
+.white {
+	background-color: white !important;
+}
+
+.hidden {
+	width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    padding: 0 !important;
+    border: 0 !important;
+    visibility: hidden;
+}
