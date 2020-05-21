@@ -16,18 +16,33 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
 	'modules'=>[
-    'user-management' => [
-        'class' => 'webvimark\modules\UserManagement\UserManagementModule',
-        'auth_assignment_table' => 'asignacion',
-        'auth_item_table' => 'permiso',
-        'auth_item_child_table' => 'rel_permiso_grupo_permisos',  
-        'auth_rule_table' => 'rol',
-        'user_table' => 'usuario',
-        'auth_item_group_table' => 'grupo_permisos',          
-        'user_visit_log_table' => 'visita',
-		'enableRegistration' => true,
-        'passwordRegexp' => '(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}',
-        'on beforeAction'=>function(yii\base\ActionEvent $event) {
+        'user-management' => [
+            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+
+            'auth_assignment_table' => 'asignacion',
+            'auth_item_table' => 'permiso',
+            'auth_item_child_table' => 'rel_permiso_grupo_permisos',  
+            'auth_rule_table' => 'rol',
+            'user_table' => 'usuario',
+            'auth_item_group_table' => 'grupo_permisos',          
+            'user_visit_log_table' => 'visita',
+
+            'enableRegistration' => true,
+            'useEmailAsLogin' => true,
+            
+            'userCanHaveMultipleRoles' => false,
+            'rolesAfterRegistration' => ['poster'],
+            
+            'registrationRegexp' => '/^(\w|\d)+$/',
+            'passwordRegexp' => '/^\S*(?=\S{8,32})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
+            
+            'maxAttempts' => 10,
+            'attemptsTimeout' => 3600,
+            
+            'controllerNamespace' => 'app\controllers\auth',
+            'registrationFormClass' => 'app\models\forms\RegistrationForm',
+
+            'on beforeAction'=>function(yii\base\ActionEvent $event) {
                 if ( $event->action->uniqueId == 'user-management/auth/login' )
                 {
                     $event->action->controller->layout = '/nosidebar.php';
@@ -79,6 +94,13 @@ $config = [
               '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
               '<controller:\w+>/<action:\w+>' => '<controller>/<action>'
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'itemTable' => 'permiso',
+            'itemChildTable' => 'rel_permiso_grupo_permisos',  
+            'assignmentTable' => 'asignacion',
+            'ruleTable' => 'rol',
         ],
     ],
     'params' => $params,

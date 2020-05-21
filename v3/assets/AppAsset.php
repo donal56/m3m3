@@ -1,38 +1,29 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
+    namespace app\assets;
 
-namespace app\assets;
+    use yii\web\AssetBundle;
+    
+    class AppAsset extends AssetBundle
+    {
+        public $basePath = '@webroot';
+        public $baseUrl = '@web';
 
-use yii\web\AssetBundle;
+        public $css = [
+            'css/semantic.min.css',
+            'css/global.css',
+            'css/standarize-bs.css',
+        ];
 
-/**
- * Main application asset bundle.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
-class AppAsset extends AssetBundle
-{
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+        public $js = [
+            'js/semantic.min.js',
+            'js/base.js',
+            'js/global.js',
+        ];
 
-    public $css = [
-        'css/semantic.min.css',
-        'css/global.css'
-    ];
+        public $depends = [
+            'yii\web\JqueryAsset',
+        ];
 
-    public $js = [
-        'js/semantic.min.js',
-        'js/base.js'
-    ];
-
-    public $depends = [
-        'yii\web\YiiAsset',
-    ];
-
-    public $jsOptions = [];
-}
+        public $jsOptions = [];
+    }
+?>

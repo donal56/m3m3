@@ -9,7 +9,7 @@ $.prototype.form.settings.text = {
 
 $.fn.form.settings.defaults = {
 	username : {
-		identifier: 'username',
+		identifier: 'LoginForm[username]',
 		rules: [
 			{
 				type: "empty",
@@ -31,7 +31,7 @@ $.fn.form.settings.defaults = {
 		]
 	},
     email : {
-        identifier: 'email',
+        identifier: 'LoginForm[email]',
         rules: [
             {
                 type   : 'empty',
@@ -43,7 +43,7 @@ $.fn.form.settings.defaults = {
         ]
     },
     password : {
-        identifier: 'password',
+        identifier: 'LoginForm[password]',
         rules: [
             {
                 type   : 'empty',

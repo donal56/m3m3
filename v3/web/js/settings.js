@@ -29,8 +29,3 @@ function save(event, fields, formID) {
 	progressBar.removeClass("hidden");
 	window.fakeProgress = setInterval(x => progressBar.progress('increment'), 20);
 }
-
-function cerrarSesion() {
-    localStorage.setItem('logged', '0');
-    setInterval(x => window.location= "login.html", 1000 );
-}

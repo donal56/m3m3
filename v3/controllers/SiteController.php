@@ -8,8 +8,8 @@ use app\models\LoginForm;
 
 class SiteController extends BaseController
 {
-    //public $freeAccessActions = ['first-action', 'another-action'];
-    //public $freeAccess = true;
+    //public $freeAccessActions = ['index'];
+    public $freeAccess = true;
 
     /**
      * {@inheritdoc}
@@ -37,47 +37,8 @@ class SiteController extends BaseController
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
+    public function actionSettings()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->render('settings');
     }
 }
