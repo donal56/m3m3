@@ -9,7 +9,6 @@
     class SemanticActiveForm extends \yii\widgets\ActiveForm
     {
         public $id = 'w0';
-        public $fieldConfig = [];
         public $enableClientScript = false;
         public $enableClientValidation = false;
         public $options = [ 'class' => 'ui equal width form' ];
@@ -27,22 +26,43 @@
             $content = ob_get_clean();
             $html = Html::beginForm($this->action, $this->method, $this->options);
             $html .= $content;
-    
+
             $id = $this->options['id'];
             $view = $this->getView();
             $view->registerJs("$('#$id').form({ })", $view::POS_END);
-    
+
             $html .= Html::endForm();
             return $html;
         }
 
-        public function submitButton($content = 'Submit', $options = [])
+        // public function registerClientScript()
+        // {
+        //     $id = $this->options['id'];
+        //     $options = Json::htmlEncode($this->getClientOptions());
+        //     $attributes = Json::htmlEncode($this->attributes);
+        //     $view = $this->getView();
+
+        //     $view->registerJs("$('#$id').form({ })", $view::POS_END);
+        //     $view->registerJs("console.log($attributes, $options);");
+        // }
+
+        public function submitButton($content = 'Submit', $icon = "", $options = [])
         {
             $options['type'] = 'submit';
-            $html = "<div class= 'field'><button" . static::renderSubmit($options) . '>';
-            $errorBox = "<div class='ui error message field'></div>";
+            
+            if($icon) {
+                $content = "<i class= '$icon icon'></i>" . $content;
+                $options['class'].= " labeled icon";
+            }
 
-            return "$html$content</button></div>$errorBox";
+            $html = "<div class= 'field'><button" . static::renderSubmit($options) . ">$content</button></div>";
+
+            return $html;
+        }
+
+        public function errorBox($addClass = "")
+        {
+            return "<div class='ui error message $addClass field'></div>";
         }
 
         public static function renderSubmit($attributes)

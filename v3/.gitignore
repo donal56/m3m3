@@ -13,11 +13,18 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
-!/vendor/webvimark/module-user-management/views/auth/login.php
-!/vendor/webvimark/module-user-management/views/auth/registration.php
-!/vendor/webvimark/module-user-management/models/forms/LoginForm.php
+vendor/**
 
+!vendor/webvimark/
+!vendor/webvimark/module-user-management/
+!vendor/webvimark/module-user-management/views/
+!vendor/webvimark/module-user-management/views/auth/
+!vendor/webvimark/module-user-management/models/
+!vendor/webvimark/module-user-management/models/forms/
+
+!vendor/webvimark/module-user-management/views/auth/login.php
+!vendor/webvimark/module-user-management/views/auth/registration.php
+!vendor/webvimark/module-user-management/models/forms/LoginForm.php
 
 # composer itself is not needed
 composer.phar

@@ -172,6 +172,8 @@ class AuthController extends BaseController
 
 		}
 
+		$this->layout = '/noSidebar';
+
 		return $this->renderIsAjax('registration', compact('model'));
 	}
 
