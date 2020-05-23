@@ -33,7 +33,7 @@ $config = [
             'userCanHaveMultipleRoles' => false,
             'rolesAfterRegistration' => ['poster'],
             
-            'registrationRegexp' => '/^(\w|\d)+$/',
+            'registrationRegexp' => '/^(\w|\d){5,25}$/',
             'passwordRegexp' => '/^\S*(?=\S{8,32})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
             
             'maxAttempts' => 10,

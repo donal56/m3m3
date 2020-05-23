@@ -6,77 +6,17 @@ use webvimark\modules\UserManagement\UserManagementModule;
 use yii\base\Model;
 use Yii;
 use yii\helpers\Html;
+use app\models\Usuario;
 
-class RegistrationForm extends Model
+class RegistrationForm extends Usuario
 {
 	public $username;
 	public $email;
 	public $password;
 	public $repeat_password;
-	public $captcha;
-
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		$rules = [
-			['captcha', 'captcha', 'captchaAction'=>'/user-management/auth/captcha'],
-
-			[['username', 'email', 'password', 'repeat_password', 'captcha'], 'required'],
-			[['username', 'password', 'repeat_password'], 'trim'],
-
-			['username', 'unique',
-				'targetClass'     => 'webvimark\modules\UserManagement\models\User',
-				'targetAttribute' => 'username',
-			],
-
-			['email', 'unique',
-				'targetClass'     => 'webvimark\modules\UserManagement\models\User',
-				'targetAttribute' => 'email',
-			],
-
-			['username', 'purgeXSS'],
-
-			['email', 'email'],
-
-			['password', 'string', 'max' => 255],
-			['password', 'match', 'pattern' => Yii::$app->getModule('user-management')->passwordRegexp],
-
-			['repeat_password', 'compare', 'compareAttribute'=>'password'],
-	
-			['username', 'string', 'max' => 50],
-			['username', 'match', 'pattern'=>Yii::$app->getModule('user-management')->registrationRegexp],
-			['username', 'match', 'not'=>true, 'pattern'=>Yii::$app->getModule('user-management')->registrationBlackRegexp],
-		];
-
-
-		return $rules;
-	}
-
-	/**
-	 * Remove possible XSS stuff
-	 *
-	 * @param $attribute
-	 */
-	public function purgeXSS($attribute)
-	{
-		$this->$attribute = Html::encode($this->$attribute);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'username'        => UserManagementModule::t('front', 'Login'),
-			'email'   		  => UserManagementModule::t('front', 'E-mail'),
-			'password'        => UserManagementModule::t('front', 'Password'),
-			'repeat_password' => UserManagementModule::t('front', 'Repeat password'),
-			'captcha'         => UserManagementModule::t('front', 'Captcha'),
-		];
-	}
+	public $nombre;
+	public $avatar;
+	//public $captcha;
 
 	/**
 	 * @param bool $performValidation
@@ -90,48 +30,9 @@ class RegistrationForm extends Model
 			return false;
 		}
 
-		$user = new User();
-		$user->password = $this->password;
-
-		if ( Yii::$app->getModule('user-management')->useEmailAsLogin )
+		if ( $this->save($performValidation) )
 		{
-			$user->email = $this->username;
-
-			// If email confirmation required then we save user with "inactive" status
-			// and without username (username will be filled with email value after confirmation)
-			if ( Yii::$app->getModule('user-management')->emailConfirmationRequired )
-			{
-				$user->status = User::STATUS_INACTIVE;
-				$user->generateConfirmationToken();
-				$user->save(false);
-
-				$this->saveProfile($user);
-
-				if ( $this->sendConfirmationEmail($user) )
-				{
-					return $user;
-				}
-				else
-				{
-					$this->addError('username', UserManagementModule::t('front', 'Could not send confirmation email'));
-				}
-			}
-			else
-			{
-				$user->username = $this->username;
-			}
-		}
-		else
-		{
-			$user->username = $this->username;
-		}
-
-
-		if ( $user->save() )
-		{
-			$this->saveProfile($user);
-
-			return $user;
+			return $this;
 		}
 		else
 		{
@@ -196,4 +97,29 @@ class RegistrationForm extends Model
 
 		return false;
 	}
+
+	public function getDirtyAttributes($names = null)
+    {
+
+        if ($names === null) {
+			return [
+				"username"				=>		$this->username, 
+				"auth_key"				=>		$this->auth_key, 
+				"password_hash"			=>		$this->password_hash, 
+				"confirmation_token"	=>		$this->confirmation_token, 
+				"status"				=>		1, 
+				"superadmin"			=>		$this->superadmin, 
+				"created_at"			=>		$this->created_at, 
+				"updated_at"			=>		$this->updated_at, 
+				"registration_ip"		=>		$this->registration_ip, 
+				"bind_to_ip"			=>		$this->bind_to_ip, 
+				"email"					=>		$this->email, 
+				"nombre"				=>		$this->nombre, 
+				"avatar"				=>		$this->avatar,
+			];
+		}
+		else {
+			return parent::getDirtyAttributes($names);
+		}
+    }
 }

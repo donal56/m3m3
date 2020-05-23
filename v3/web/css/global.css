@@ -48,6 +48,10 @@ button.link.button a,  button.link.button a:hover button.link.button a:visited, 
     font-size: 1em;
 }
 
+.ui.error.message.field {
+	margin-bottom: 10px;
+}
+
 /** Main content **/
 
 body.pushable div.pusher, body:not(.pushable) main {
@@ -238,6 +242,15 @@ img.custom.avatar {
 	height: 40px !important;
 	border-radius: 10px !important;
 	border: 1px solid #EEEEEE;
+	object-fit: cover;
+}
+
+img.custom.thumbnail.avatar  {
+	margin-right: 5px;
+}
+
+.custom.thumbnail.avatar ~ input[type= file] {
+	width: 86%;
 }
 
 .white {

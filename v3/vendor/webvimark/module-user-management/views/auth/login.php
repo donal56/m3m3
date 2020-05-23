@@ -27,7 +27,7 @@
 						echo $form->field($model, 'rememberMe')->checkbox();
 				?>
 					
-				<?= $form->submitButton('Iniciar sesión', ['class' => 'ui blue fluid button']) ?>
+				<?= $form->submitButton('Iniciar sesión', null, ['class' => 'ui blue fluid button']) ?>
 				<?= $form->errorBox() ?>
 
 			<?php SemanticActiveForm::end() ?>

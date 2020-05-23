@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * EtiquetaController implements the CRUD actions for Etiqueta model.
  */
-class EtiquetaController extends Controller
+class EtiquetaController extends BaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Etiqueta models.

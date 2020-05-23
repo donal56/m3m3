@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * ComentarioController implements the CRUD actions for Comentario model.
  */
-class ComentarioController extends Controller
+class ComentarioController extends BaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Comentario models.

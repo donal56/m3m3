@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * PublicacionController implements the CRUD actions for Publicacion model.
  */
-class PublicacionController extends Controller
+class PublicacionController extends BaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Publicacion models.

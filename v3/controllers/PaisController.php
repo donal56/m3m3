@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * PaisController implements the CRUD actions for Pais model.
  */
-class PaisController extends Controller
+class PaisController extends BaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Pais models.

@@ -29,22 +29,19 @@
 
             $id = $this->options['id'];
             $view = $this->getView();
-            $view->registerJs("$('#$id').form({ })", $view::POS_END);
+            $view->registerJs("$('#$id').on('submit', e => {
+                let valid = $('#$id').form('validate form');  
+                if(!valid) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                return valid;
+            });", $view::POS_END);
 
             $html .= Html::endForm();
             return $html;
         }
-
-        // public function registerClientScript()
-        // {
-        //     $id = $this->options['id'];
-        //     $options = Json::htmlEncode($this->getClientOptions());
-        //     $attributes = Json::htmlEncode($this->attributes);
-        //     $view = $this->getView();
-
-        //     $view->registerJs("$('#$id').form({ })", $view::POS_END);
-        //     $view->registerJs("console.log($attributes, $options);");
-        // }
 
         public function submitButton($content = 'Submit', $icon = "", $options = [])
         {

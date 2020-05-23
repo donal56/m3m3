@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Response;
-use app\models\LoginForm;
+use app\models\Usuario;
+use yii\web\ForbiddenHttpException;
+use webvimark\modules\UserManagement\models\forms\ChangeOwnPasswordForm;
 
 class SiteController extends BaseController
 {
@@ -39,6 +41,22 @@ class SiteController extends BaseController
 
     public function actionSettings()
     {
-        return $this->render('settings');
+        $user           =   Usuario::getCurrentUser();
+        $changePassword =   new ChangeOwnPasswordForm(['user'=> $user]);
+
+        $this->layout= "/nosidebar";
+
+        if ( $user->status != Usuario::STATUS_ACTIVE )
+		{
+			throw new ForbiddenHttpException();
+		}
+
+		if ( Yii::$app->request->isAjax AND $user->load(Yii::$app->request->post()) AND $user->changePassword() )
+		{
+            Yii::$app->response->format = Response::FORMAT_JSON;
+			return true;
+		}
+        
+        return $this->render('settings', [ "model" => $user, "modelPassword" => new ChangeOwnPasswordForm(['user'=> $user]) ]);
     }
 }

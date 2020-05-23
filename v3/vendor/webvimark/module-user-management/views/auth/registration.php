@@ -25,16 +25,12 @@
 		<div class="description">
 			<?php $form = SemanticActiveForm::begin() ?>
 				
+				<?= $form->field($model, 'nombre')->textInput(['max-length' => '45']) ?>
+				<?= $form->field($model, 'username')->textInput(['max-length' => '50']) ?>
+				<?= $form->field($model, 'avatar')->fileInput(true, ["accept" => ".jpg,.jpeg,.png"]) ?>
 				<?= $form->field($model, 'email')->textInput(['type' => 'email']) ?>
-				<?= $form->field($model, 'username')->textInput(['maxlength' => 50]) ?>
 				<?= $form->field($model, 'password')->passwordInput(['autocomplete' => 'off']) ?>
 				<?= $form->field($model, 'repeat_password')->passwordInput(['autocomplete' => 'off']) ?>
-				<?php $form->field($model, 'captcha')->widget(Captcha::className(), [
-					'template' => '<div class="two fields">
-										<div class="center aligned field">{image}</div>
-										<div class="field">{input}</div></div>',
-					'captchaAction'=>['/user-management/auth/captcha']
-				]) ?>
 					
 				<?= $form->submitButton(UserManagementModule::t('front', 'Register'), 'arrow alternate circle right', 
 					['class' => 'ui violet fluid button']) ?>

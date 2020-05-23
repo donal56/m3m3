@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use webvimark\modules\UserManagement\models\User;
 
 /**
@@ -63,5 +64,17 @@ class Pais extends \app\components\CustomActiveRecord
     public function getUsuarios()
     {
         return $this->hasMany(User::className(), ['id_pais' => 'id']);
+    }
+
+    public static function getList() {
+
+        $paises = self::find()->all();
+        
+        $list = [];
+        foreach ($paises as $pais) {
+            $list[$pais->id] = "<i class='$pais->code flag'></i>$pais->nombre";
+        }
+
+        return $list;
     }
 }
