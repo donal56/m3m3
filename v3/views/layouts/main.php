@@ -93,7 +93,7 @@
             <i class="leaf icon"></i>
             Nuevo
         </a>
-        <a class="item upload-post" href="upload_post.html">Subir meme ツ</a>
+        <?= Html::a("Subir meme ツ", Url::to("site/upload"), [ "class" => "item upload-post" ])?>
     </div>
     <div class="ui secondary pointing top fixed white menu" id="navbar">
         <div class="ui container">

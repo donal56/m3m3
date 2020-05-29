@@ -8,3 +8,4 @@ Evolución de un proyecto en 3 fases: _Standalone_, _frontend_ y _backend_, con 
 
 - Cambiar Semantic UI a https://fomantic-ui.com
 - Reglas de validacion automaticas del lado del cliente
+- SemanticFileInput, unselect file option

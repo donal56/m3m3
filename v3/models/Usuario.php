@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
 use webvimark\modules\UserManagement\UserManagementModule;
 use webvimark\modules\UserManagement\models\UserVisitLog;
 use webvimark\modules\UserManagement\models\rbacDB\Permission;

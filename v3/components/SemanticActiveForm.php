@@ -9,13 +9,21 @@
     class SemanticActiveForm extends \yii\widgets\ActiveForm
     {
         public $id = 'w0';
-        public $enableClientScript = false;
-        public $enableClientValidation = false;
+        public $ajax = false;
         public $options = [ 'class' => 'ui equal width form' ];
         public $fieldClass = 'app\components\SemanticActiveField';
         public $validationStateOn = self::VALIDATION_STATE_ON_INPUT;
         public static $dataAttributes = ['aria', 'data', 'data-ng', 'ng'];
         public static $submitAttributesOrder = [ 'type', 'id', 'class', 'name', 'value', 'form', 'disabled' ];
+        
+        public $enableClientScript = false;
+        public $enableClientValidation = false;
+
+        public function init() {
+            parent::init();
+            $this->enableClientScript = false;
+            $this->enableClientValidation = false;
+        }
 
         public function run()
         {
@@ -29,15 +37,99 @@
 
             $id = $this->options['id'];
             $view = $this->getView();
-            $view->registerJs("$('#$id').on('submit', e => {
-                let valid = $('#$id').form('validate form');  
-                if(!valid) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
 
-                return valid;
-            });", $view::POS_END);
+            if($this->ajax) {
+                $progressBarActiveText  =   $this->ajax["activeText"] ? $this->ajax["activeText"] : "Guardando cambios {value}%";
+                $progressBarSuccessText  =   $this->ajax["successText"] ? $this->ajax["successText"] : "Datos guardados!";
+
+                $script = <<<SCRIPT
+                    let form_$id = document.querySelector("#$id");
+                    let form_conf_$id = {
+                        url : form_$id.action,
+                        method : form_$id.method,
+                        contentType : form_$id.encoding,
+                        success : data => {
+                            console.log(data)
+                        },
+                        xhr : function()
+                        {
+                            let xhr = new window.XMLHttpRequest();
+                            let form_progress_$id = $("#$id .hidden.progress");
+                 
+                            form_progress_$id.removeClass("hidden");
+
+                            form_progress_$id.progress({
+                                total    : 100,
+                                text     : {
+                                    active: '$progressBarActiveText',
+                                    success: '$progressBarSuccessText'
+                                },
+                                onSuccess: () => {}
+                            });
+
+                            //Upload progress
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                if (evt.lengthComputable) {  
+                                    var percentComplete = 100 * evt.loaded / evt.total;
+                                    console.log("u " + evt.loaded + " / " + evt.total + " = " + percentComplete);
+                                    form_progress_$id.progress('set percent', percentComplete);
+                                }
+                            }, false); 
+                            
+                            //Download progress
+                            xhr.addEventListener("progress", function(evt) {
+                                if (evt.lengthComputable) {  
+                                    var percentComplete = 100 * evt.loaded / evt.total;
+                                    console.log("d " + evt.loaded + " / " + evt.total + " = " + percentComplete);
+                                    form_progress_$id.progress('set percent', percentComplete);
+                                }
+                            }, false); 
+
+                            return xhr;
+                        },
+                    };
+                    
+                    $("#$id").form({
+                        onSuccess : (event, fields) =>  {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            if(form_conf_$id.contentType === "multipart/form-data" || form_conf_$id.contentType === false) {
+                                form_conf_$id.cache         =   false;
+                                form_conf_$id.processData   =   false;
+                                form_conf_$id.contentType   =   false;
+        
+                                let dataEl = new FormData();
+                                Object.entries(fields).forEach( i => dataEl.append(i[0], i[1]) );
+        
+                                form_conf_$id.data  =   dataEl;
+                            }
+                            else {
+                                form_conf_$id.data = fields;
+                            }
+                            
+                            $.ajax(form_conf_$id);
+                        }
+                    });
+
+SCRIPT;
+            }
+            else {
+                $script = <<<SCRIPT
+                $('#$id').on('submit', e => {
+                    let valid = $('#$id').form('validate form');  
+                    if(!valid) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
+                    return valid;
+                });
+
+SCRIPT;
+            }
+
+            $view->registerJs($script, $view::POS_END);
 
             $html .= Html::endForm();
             return $html;
@@ -46,13 +138,25 @@
         public function submitButton($content = 'Submit', $icon = "", $options = [])
         {
             $options['type'] = 'submit';
+            $progressBar = "";
             
             if($icon) {
                 $content = "<i class= '$icon icon'></i>" . $content;
                 $options['class'].= " labeled icon";
             }
 
-            $html = "<div class= 'field'><button" . static::renderSubmit($options) . ">$content</button></div>";
+            if($this->ajax) {
+                $progressBarClass   =   $this->ajax["class"] ? $this->ajax["class"] : "";
+                $progressBar =
+                    "<div class='ui {$progressBarClass} progress hidden'>
+                        <div class='bar'>
+                            <div class='progress'></div>
+                        </div>
+                        <div class='label'></div>
+                    </div>";
+            }
+
+            $html = "$progressBar<div class= 'field'><button" . static::renderSubmit($options) . ">$content</button></div>";
 
             return $html;
         }

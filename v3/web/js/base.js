@@ -7,11 +7,10 @@ $.fn.form.settings.prompt = {
     usuario     :   "El usuario debe contener entre 5 y 25 caráteres alfanuméricos.",
     avatar      :   "Seleccione una foto de perfil.",
     coincidirContraseña     :   "Las contraseñas deben coincidir.",
-    fechaNacimiento     :   "Ingrese su fecha de nacimiento.",
-    sexo        :   "Especifique su sexo.",
+    postTitle   :   "Agregue un titulo para su publicación.",
+    media       :   "Seleccione una imagen o video para su publicación.",
+    etiquetas   :   "Seleccione de 1 a 5 etiquetas.",
 }
-
-
 
 $.prototype.form.settings.text = {
     unspecifiedField    :   'Este campo',
@@ -20,40 +19,25 @@ $.prototype.form.settings.text = {
 
 
 
-$.fn.form.settings.rules.contraseña = function (value) {
-    //return $.fn.form.settings.rules.regExp(value, /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}/);
-    return $.fn.form.settings.rules.regExp(value, /^\S*(?=\S{8,32})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/);
-}
+//return $.fn.form.settings.rules.regExp(value, /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}/);
+$.fn.form.settings.rules.contraseña = value => $.fn.form.settings.rules.regExp(value, /^\S*(?=\S{8,32})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/);
 
-$.fn.form.settings.rules.correo = function(value) {
-    return $.fn.form.settings.rules.empty(value) && $.fn.form.settings.rules.email(value);
-};
+$.fn.form.settings.rules.correo = value => $.fn.form.settings.rules.empty(value) && $.fn.form.settings.rules.email(value);
 
-$.fn.form.settings.rules.nombre = function(value) {
-    return $.fn.form.settings.rules.regExp(value, /[a-zA-Z]{1,45}/);
-};
+$.fn.form.settings.rules.nombre = value => $.fn.form.settings.rules.regExp(value, /[a-zA-Z]{1,45}/);
 
-$.fn.form.settings.rules.usuario = function(value) {
-    return $.fn.form.settings.rules.regExp(value, /^(\w|\d){5,25}$/);
-};
+$.fn.form.settings.rules.usuario = value => $.fn.form.settings.rules.regExp(value, /^(\w|\d){5,25}$/);
 
-$.fn.form.settings.rules.avatar = function(value) {
-    return $.fn.form.settings.rules.empty(value);
-};
+$.fn.form.settings.rules.avatar = value => $.fn.form.settings.rules.empty(value);
 
-$.fn.form.settings.rules.coincidirContraseña = function(value, identifier) {
-    return $.fn.form.settings.rules.match(value, identifier);
-};
+$.fn.form.settings.rules.coincidirContraseña = (value, identifier) => $.fn.form.settings.rules.match(value, identifier);
 
-$.fn.form.settings.rules.fechaNacimiento = function(value) {
-    return $.fn.form.settings.rules.empty(value);
-};
+$.fn.form.settings.rules.postTitle = value => $.fn.form.settings.rules.empty(value) && $.fn.form.settings.rules.maxLength(value, 255);
 
-$.fn.form.settings.rules.sexo = function(value) {
-    return $.fn.form.settings.rules.empty(value);
-};
+$.fn.form.settings.rules.media = value => $.fn.form.settings.rules.empty(value);
 
-
+$.fn.form.settings.rules.etiquetas = value => $.fn.form.settings.rules.minCount(value, 1) && $.fn.form.settings.rules.maxCount(value, 5);
+ 
 
 $.fn.form.settings.defaults = {
     email : {
@@ -91,12 +75,42 @@ $.fn.form.settings.defaults = {
         rules       :   [ {  type   : 'coincidirContraseña[registrationform-password]' } ],
     },
 
-    // fechaNacimiento : {
-    //     identifier  :   'RegistrationForm[fecha_nacimiento]',
-    //     rules       :   [ {  type   : 'fechaNacimiento' } ],
-    // },
-    // sexo : {
-    //     identifier  :   'RegistrationForm[sexo]',
-    //     rules       :   [ {  type   : 'sexo' } ],
-    // },  
+
+    username : {
+        identifier  :   'usuario-username',
+        rules       :   [ {  type   : 'usuario' } ],
+    },
+    email : {
+        identifier  :   'usuario-email',
+        rules       :   [ {  type   : 'correo' } ],
+    },
+
+    
+    current_password : {
+        identifier  :   'changeownpasswordform-current_password',
+        rules       :   [ {  type   : 'contraseña' } ],
+    },
+    password : {
+        identifier  :   'changeownpasswordform-password',
+        rules       :   [ {  type   : 'contraseña' } ],
+    },
+    repeatPassword : {
+        identifier  :   'changeownpasswordform-repeat_password',
+        rules       :   [ {  type   : 'coincidirContraseña[changeownpasswordform-password]' } ],
+    },
+
+
+    titulo : {
+        identifier  :   'publicacion-titulo',
+        rules       :   [ {  type   : 'postTitle' } ],
+    },
+    media : {
+        identifier  :   'publicacion-media',
+        rules       :   [ {  type   : 'media' } ],
+    },
+    etiquetas : {
+        identifier  :   'publicacion-relpublicacionetiquetas',
+        rules       :   [ {  type   : 'etiquetas' } ],
+    },
+    
 };

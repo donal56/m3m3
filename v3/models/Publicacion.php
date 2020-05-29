@@ -15,6 +15,7 @@ use webvimark\modules\UserManagement\models\User;
  * @property int $id_usuario
  * @property string $fecha_creacion
  * @property string|null $fecha_actualizacion
+ * @property int $nsfw
  *
  * @property Comentario[] $comentarios
  * @property Usuario $usuario
@@ -23,6 +24,10 @@ use webvimark\modules\UserManagement\models\User;
  */
 class Publicacion extends \app\components\CustomActiveRecord
 {
+    public $media_file;
+
+	public const MEDIA_BASE_PATH = 'media/posts/';
+
     /**
      * {@inheritdoc}
      */
@@ -37,14 +42,15 @@ class Publicacion extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'url', 'titulo', 'media', 'id_usuario'], 'required'],
-            [['id', 'id_usuario'], 'integer'],
+            [['id', 'url', 'titulo', 'media', 'id_usuario', 'nsfw', 'media_file'], 'required'],
+            [['id', 'id_usuario', 'nsfw'], 'integer'],
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['url'], 'string', 'max' => 10],
             [['titulo', 'media'], 'string', 'max' => 255],
             [['url'], 'unique'],
             [['id'], 'unique'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            ['media_file', 'file','extensions' => 'png, jpg, jpeg, gif, mp4, avi, webm', 'skipOnError' => true],
         ];
     }
 
@@ -61,6 +67,8 @@ class Publicacion extends \app\components\CustomActiveRecord
             'id_usuario' => 'Usuario',
             'fecha_creacion' => 'Fecha de creación',
             'fecha_actualizacion' => 'Fecha de actualización',
+            'relPublicacionEtiquetas' => 'Etiquetas',
+            'nsfw' => 'Marcar publicación como NSFW (Not Safe For Work)'
         ];
     }
 
@@ -102,5 +110,9 @@ class Publicacion extends \app\components\CustomActiveRecord
     public function getRelPublicacionEtiquetas()
     {
         return $this->hasMany(RelPublicacionEtiqueta::className(), ['id_publicacion' => 'id']);
+    }
+
+    public function mediaExists($key){
+		return glob(self::MEDIA_BASE_PATH . $key .".*")[0];
     }
 }

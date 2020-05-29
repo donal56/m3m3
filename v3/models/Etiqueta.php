@@ -57,4 +57,16 @@ class Etiqueta extends \app\components\CustomActiveRecord
     {
         return $this->hasMany(RelPublicacionEtiqueta::className(), ['id_etiqueta' => 'id']);
     }
+
+    public static function getList() {
+
+        $etiquetas = self::find()->all();
+
+        $list = [];
+
+        foreach ($etiquetas as $etiqueta) {
+            $list[$etiqueta->id] = $etiqueta->nombre;
+        }
+        return $list;
+    }
 }

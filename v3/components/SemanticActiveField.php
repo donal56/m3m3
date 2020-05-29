@@ -142,7 +142,11 @@ class SemanticActiveField extends \yii\widgets\ActiveField
                     let input    =   document.querySelector('#$id');
                      
                     if (input.files && input.files[0]) {
-                        var reader = new FileReader();
+                        let reader = new FileReader();
+                        let link = input.previousElementSibling.previousElementSibling;
+
+                        if(link.classList.value == "$thumbnailClass")
+                            link.removeAttribute("href");
                  
                         reader.onload = e => $('#thumbnail-$attr').attr('src', e.target.result);
                         reader.readAsDataURL(input.files[0]);
@@ -155,4 +159,23 @@ SCRIPT;
         
         return $this;
     }
+
+    public function textarea($options = [])
+    {
+        $options = array_merge($this->inputOptions, $options);
+
+        if ($this->form->validationStateOn === SemanticActiveForm::VALIDATION_STATE_ON_INPUT) {
+            $this->addErrorClassIfNeeded($options);
+        }
+        
+        $this->addAriaAttributes($options);
+        $this->adjustLabelFor($options);
+        $this->parts['{input}'] = Html::activeTextarea($this->model, $this->attribute, $options);
+        
+        if(isset($options["info"]))
+            $this->parts['{input}'] .= "<label class='field info'>{$options["info"]}</label>";
+
+        return $this;
+    }
+    
 }

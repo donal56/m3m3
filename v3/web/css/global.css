@@ -250,7 +250,7 @@ img.custom.thumbnail.avatar  {
 }
 
 .custom.thumbnail.avatar ~ input[type= file] {
-	width: 86%;
+	width: 89%;
 }
 
 .white {
