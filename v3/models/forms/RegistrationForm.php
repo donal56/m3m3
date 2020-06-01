@@ -1,12 +1,10 @@
 <?php
 namespace app\models\forms;
 
+use Yii;
+use app\models\Usuario;
 use webvimark\modules\UserManagement\models\User;
 use webvimark\modules\UserManagement\UserManagementModule;
-use yii\base\Model;
-use Yii;
-use yii\helpers\Html;
-use app\models\Usuario;
 
 class RegistrationForm extends Usuario
 {

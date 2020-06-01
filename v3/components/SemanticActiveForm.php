@@ -38,9 +38,14 @@
             $id = $this->options['id'];
             $view = $this->getView();
 
-            if($this->ajax) {
-                $progressBarActiveText  =   $this->ajax["activeText"] ? $this->ajax["activeText"] : "Guardando cambios {value}%";
-                $progressBarSuccessText  =   $this->ajax["successText"] ? $this->ajax["successText"] : "Datos guardados!";
+            if($ajaxOptions = $this->ajax) {
+                $progressBarActiveText  =   $ajaxOptions["activeText"] ? $ajaxOptions["activeText"] : "Guardando cambios {value}%";
+                $progressBarSuccessText =   $ajaxOptions["successText"] ? $ajaxOptions["successText"] : "Datos guardados!";
+                $progressBarErrorText   =   $ajaxOptions["errorText"] ? $ajaxOptions["errorText"] : "Hubo un error al completar la solicitud";
+
+                $ajaxRedirect   =   $ajaxOptions["redirect"] ? "window.location= '" . $ajaxOptions['redirect'] . "';" : "";
+
+                $debugError     =   YII_ENV_DEV ? "console.log(data);" : "";
 
                 $script = <<<SCRIPT
                     let form_$id = document.querySelector("#$id");
@@ -49,7 +54,12 @@
                         method : form_$id.method,
                         contentType : form_$id.encoding,
                         success : data => {
-                            console.log(data)
+                            $debugError
+                            
+                        },
+                        error : (xhr, data, e) => {
+                            form_progress_$id.progress("set error");
+                            $debugError
                         },
                         xhr : function()
                         {
@@ -61,10 +71,14 @@
                             form_progress_$id.progress({
                                 total    : 100,
                                 text     : {
-                                    active: '$progressBarActiveText',
-                                    success: '$progressBarSuccessText'
+                                    active  : '$progressBarActiveText',
+                                    success : '$progressBarSuccessText',
+                                    error   : '$progressBarErrorText',
+                                    ratio   : '{value} de {total}',
                                 },
-                                onSuccess: () => {}
+                                onSuccess: () => {
+                                    $ajaxRedirect
+                                }
                             });
 
                             //Upload progress
@@ -94,6 +108,8 @@
                             event.preventDefault();
                             event.stopPropagation();
 
+                            $("#$id input[type=checkbox]:not(:checked)").each( (i,n) => fields[n.name] = "0" );
+
                             if(form_conf_$id.contentType === "multipart/form-data" || form_conf_$id.contentType === false) {
                                 form_conf_$id.cache         =   false;
                                 form_conf_$id.processData   =   false;
@@ -101,7 +117,15 @@
         
                                 let dataEl = new FormData();
                                 Object.entries(fields).forEach( i => dataEl.append(i[0], i[1]) );
-        
+
+                                $("#$id").find("input[type=file]").each( (n, i) => {
+                                    if(i.multiple) {
+                                        dataEl.append(i.name, i.files);
+                                    } else {
+                                        dataEl.append(i.name, i.files[0]);
+                                    }
+                                });
+
                                 form_conf_$id.data  =   dataEl;
                             }
                             else {

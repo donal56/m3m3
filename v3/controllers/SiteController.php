@@ -5,9 +5,11 @@ namespace app\controllers;
 use Yii;
 use yii\web\Response;
 use app\models\Usuario;
+use yii\web\UploadedFile;
 use app\models\Publicacion;
+use app\components\Utilidades;
 use yii\web\ForbiddenHttpException;
-use webvimark\modules\UserManagement\models\User;
+use app\models\RelPublicacionEtiqueta;
 use webvimark\modules\UserManagement\models\forms\ChangeOwnPasswordForm;
 
 class SiteController extends BaseController
@@ -34,12 +36,42 @@ class SiteController extends BaseController
     public function actionUpload()
     {
         $publicacion = new Publicacion();
-        
-        if ( Yii::$app->request->isAjax && $publicacion->load(Yii::$app->request->post()))
-		{
 
+        $datos = Yii::$app->request->post();
+
+        if (Yii::$app->request->isAjax && $publicacion->load($datos))
+		{
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return $publicacion;
+            
+            $publicacion->media_file = UploadedFile::getInstance($publicacion, 'media');
+            $publicacion->url = Publicacion::generarURL();
+            $publicacion->id_usuario = Yii::$app->user->id;
+            
+            if( $publicacion->validate() ) {
+                
+                $ruta= $publicacion::MEDIA_BASE_PATH . Utilidades::generateRandomString(15) .  '.' .          
+                $publicacion->media_file->extension;
+                
+                $publicacion->media_file->saveAs($ruta);
+                $publicacion->media = "/" . $ruta;
+                
+                if($publicacion->save(false)) {
+                    
+                    $etiquetas = explode(",", $datos["Publicacion"]["relPublicacionEtiquetas"]);
+                    
+                    foreach ($etiquetas as $etiqueta) {
+                        $tag = new RelPublicacionEtiqueta();
+                        $tag->id_publicacion = $publicacion->id;
+                        $tag->id_etiqueta = $etiqueta;
+                        
+                        $tag->save();
+                    }
+                    return $publicacion;
+                }
+            }
+            
+            Yii::$app->response->setStatusCode(400);
+            return $publicacion->getErrors();
         }
         else
         {

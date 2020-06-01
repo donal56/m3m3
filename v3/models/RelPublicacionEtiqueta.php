@@ -30,9 +30,8 @@ class RelPublicacionEtiqueta extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_publicacion', 'id_etiqueta'], 'required'],
-            [['id', 'id_publicacion', 'id_etiqueta'], 'integer'],
-            [['id'], 'unique'],
+            [['id_publicacion', 'id_etiqueta'], 'required'],
+            [['id_publicacion', 'id_etiqueta'], 'integer'],
             [['id_publicacion'], 'exist', 'skipOnError' => true, 'targetClass' => Publicacion::className(), 'targetAttribute' => ['id_publicacion' => 'id']],
             [['id_etiqueta'], 'exist', 'skipOnError' => true, 'targetClass' => Etiqueta::className(), 'targetAttribute' => ['id_etiqueta' => 'id']],
         ];

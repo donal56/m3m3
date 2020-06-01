@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Url;
 use app\models\Etiqueta;
 use app\components\SemanticActiveForm;
 
@@ -17,7 +18,7 @@ $color= "green";
                 <div class="header">Subir publicación</div>
             </div>
             <div class="description">
-                <?php $form = SemanticActiveForm::begin(["ajax" => [ "class" => "indicating small $color" ]]) ?>
+                <?php $form = SemanticActiveForm::begin(["ajax" => [ "class" => "indicating small $color", "redirect" => Url::home() ]]) ?>
                     <?= $form->field($model, 'titulo')->textarea(["rows" => 2, "info" => "Max. 255 carácteres"]) ?>
                     <?= $form->field($model, 'media')->fileInput(false, ["accept" => ".png,.jpg,.jpeg,.gif,.mp4,.avi,.webm"]) ?>
                     <?= $form->field($model, "relPublicacionEtiquetas")->listBox(Etiqueta::getList(), ['multiple' => true]) ?>

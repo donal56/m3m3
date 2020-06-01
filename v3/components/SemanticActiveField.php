@@ -62,23 +62,71 @@ class SemanticActiveField extends \yii\widgets\ActiveField
         return $this;
     }
 
-    public function toogle($options = [])
-    {
-        $options["toogle"] = true;
-
-        $this->parts['{label}'] = '';
-        $this->parts['{input}'] = "<div class= 'ui toggle checkbox'>" . SemanticHtml::activeCheckbox($this->model, $this->attribute, $options) . "</div>";
-
-        if ($this->form->validationStateOn === SemanticActiveForm::VALIDATION_STATE_ON_INPUT) {
-            $this->addErrorClassIfNeeded($options);
-        }
-
-        $this->addAriaAttributes($options);
-        $this->adjustLabelFor($options);
-
-        return $this;
-
-    }
+     /* Thumbnail: Defaults to false, enabled if true, enabled with custom class if string */
+     public function fileInput($thumbnail = false, $options = [])
+     {
+         if(!isset($options["hiddenOptions"]))
+             $options["hiddenOptions"] = ["name" => "hidden_file_input_" . $this->attribute];
+ 
+         // https://github.com/yiisoft/yii2/pull/795
+         if ($this->inputOptions !== ['class' => 'form-control']) {
+             $options = array_merge($this->inputOptions, $options);
+         }
+         // https://github.com/yiisoft/yii2/issues/8779
+         if (!isset($this->form->options['enctype'])) {
+             $this->form->options['enctype'] = 'multipart/form-data';
+         }
+ 
+         if ($this->form->validationStateOn === SemanticActiveForm::VALIDATION_STATE_ON_INPUT) {
+             $this->addErrorClassIfNeeded($options);
+         }
+         
+         $this->addAriaAttributes($options);
+         $this->adjustLabelFor($options);
+         $this->parts['{input}'] = Html::activeFileInput($this->model, $this->attribute, $options);
+         
+         if($thumbnail && !isset($options["multiple"])) {
+             $view   =   $this->form->getView();
+             $attr   =   $this->attribute;
+             $id     =   static::getInputId($this->model, $attr);
+             $file   =   $this->model->$attr;
+             $thumbnailClass = $thumbnail === true ? "custom thumbnail avatar" : $thumbnail;
+ 
+             $thumbnailHtml = Html::img($file, [
+                 "class" =>  $thumbnailClass,
+                 "id"    =>  "thumbnail-$attr",
+             ]);
+ 
+             if($file)
+                 $thumbnailHtml = Html::a($thumbnailHtml, $file, [
+                     "target"    =>  "_blank",
+                     "class"     =>  $thumbnailClass,
+                 ]);
+             
+             $this->parts['{input}'] = $thumbnailHtml . $this->parts['{input}'];
+ 
+             $script = <<<SCRIPT
+                 $('#$id').on('change', () => {
+                     let input    =   document.querySelector('#$id');
+                      
+                     if (input.files && input.files[0]) {
+                         let reader = new FileReader();
+                         let link = input.previousElementSibling.previousElementSibling;
+ 
+                         if(link.classList.value == "$thumbnailClass")
+                             link.removeAttribute("href");
+                  
+                         reader.onload = e => $('#thumbnail-$attr').attr('src', e.target.result);
+                         reader.readAsDataURL(input.files[0]);
+                     }
+                 });
+ SCRIPT;
+ 
+             $view->registerJs($script, $view::POS_END);
+         }
+         
+         return $this;
+     }
 
     public function radioList($items, $options = ['class' => 'inline fields'])
     {
@@ -91,72 +139,6 @@ class SemanticActiveField extends \yii\widgets\ActiveField
         $this->adjustLabelFor($options);
         $this->parts['{input}'] = SemanticHtml::activeRadioList($this->model, $this->attribute, $items, $options);
 
-        return $this;
-    }
-
-    /* Thumbnail: Defaults to false, enabled if true, enabled with custom class if string */
-    public function fileInput($thumbnail = false, $options = [])
-    {
-        if(!isset($options["hiddenOptions"]))
-            $options["hiddenOptions"] = ["name" => "hidden_file_input_" . $this->attribute];
-
-        // https://github.com/yiisoft/yii2/pull/795
-        if ($this->inputOptions !== ['class' => 'form-control']) {
-            $options = array_merge($this->inputOptions, $options);
-        }
-        // https://github.com/yiisoft/yii2/issues/8779
-        if (!isset($this->form->options['enctype'])) {
-            $this->form->options['enctype'] = 'multipart/form-data';
-        }
-
-        if ($this->form->validationStateOn === SemanticActiveForm::VALIDATION_STATE_ON_INPUT) {
-            $this->addErrorClassIfNeeded($options);
-        }
-        
-        $this->addAriaAttributes($options);
-        $this->adjustLabelFor($options);
-        $this->parts['{input}'] = Html::activeFileInput($this->model, $this->attribute, $options);
-        
-        if($thumbnail && !isset($options["multiple"])) {
-            $view   =   $this->form->getView();
-            $attr   =   $this->attribute;
-            $id     =   static::getInputId($this->model, $attr);
-            $file   =   $this->model->$attr;
-            $thumbnailClass = $thumbnail === true ? "custom thumbnail avatar" : $thumbnail;
-
-            $thumbnailHtml = Html::img($file, [
-                "class" =>  $thumbnailClass,
-                "id"    =>  "thumbnail-$attr",
-            ]);
-
-            if($file)
-                $thumbnailHtml = Html::a($thumbnailHtml, $file, [
-                    "target"    =>  "_blank",
-                    "class"     =>  $thumbnailClass,
-                ]);
-            
-            $this->parts['{input}'] = $thumbnailHtml . $this->parts['{input}'];
-
-            $script = <<<SCRIPT
-                $('#$id').on('change', () => {
-                    let input    =   document.querySelector('#$id');
-                     
-                    if (input.files && input.files[0]) {
-                        let reader = new FileReader();
-                        let link = input.previousElementSibling.previousElementSibling;
-
-                        if(link.classList.value == "$thumbnailClass")
-                            link.removeAttribute("href");
-                 
-                        reader.onload = e => $('#thumbnail-$attr').attr('src', e.target.result);
-                        reader.readAsDataURL(input.files[0]);
-                    }
-                });
-SCRIPT;
-
-            $view->registerJs($script, $view::POS_END);
-        }
-        
         return $this;
     }
 
@@ -176,6 +158,24 @@ SCRIPT;
             $this->parts['{input}'] .= "<label class='field info'>{$options["info"]}</label>";
 
         return $this;
+    }
+
+    public function toogle($options = [])
+    {
+        $options["toogle"] = true;
+
+        $this->parts['{label}'] = '';
+        $this->parts['{input}'] = "<div class= 'ui toggle checkbox'>" . SemanticHtml::activeCheckbox($this->model, $this->attribute, $options) . "</div>";
+
+        if ($this->form->validationStateOn === SemanticActiveForm::VALIDATION_STATE_ON_INPUT) {
+            $this->addErrorClassIfNeeded($options);
+        }
+
+        $this->addAriaAttributes($options);
+        $this->adjustLabelFor($options);
+
+        return $this;
+
     }
     
 }

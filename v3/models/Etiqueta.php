@@ -60,7 +60,7 @@ class Etiqueta extends \app\components\CustomActiveRecord
 
     public static function getList() {
 
-        $etiquetas = self::find()->all();
+        $etiquetas = self::find()->where(["activo" => 1])->all();
 
         $list = [];
 

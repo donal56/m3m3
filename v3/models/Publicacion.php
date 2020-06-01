@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\Utilidades;
 use webvimark\modules\UserManagement\models\User;
 
 /**
@@ -42,13 +43,13 @@ class Publicacion extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'url', 'titulo', 'media', 'id_usuario', 'nsfw', 'media_file'], 'required'],
-            [['id', 'id_usuario', 'nsfw'], 'integer'],
+            [['url', 'titulo', 'media', 'id_usuario', 'nsfw', 'media_file'], 'required'],
+            ['id_usuario', 'integer'],
+            ['nsfw', 'boolean'],
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['url'], 'string', 'max' => 10],
             [['titulo', 'media'], 'string', 'max' => 255],
             [['url'], 'unique'],
-            [['id'], 'unique'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             ['media_file', 'file','extensions' => 'png, jpg, jpeg, gif, mp4, avi, webm', 'skipOnError' => true],
         ];
@@ -114,5 +115,20 @@ class Publicacion extends \app\components\CustomActiveRecord
 
     public function mediaExists($key){
 		return glob(self::MEDIA_BASE_PATH . $key .".*")[0];
+    }
+
+    public static function generarURL() {
+        $url = "";
+
+        do {
+            $url = Utilidades::generateRandomString();
+        }
+        while(self::urlExists($url));
+
+        return $url;
+    }
+
+    private static function urlExists($url) {
+        return Publicacion::findOne(["url" => $url]) != null;
     }
 }
