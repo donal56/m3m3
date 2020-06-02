@@ -33,12 +33,10 @@ class Pais extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'code', 'nombre'], 'required'],
-            [['id'], 'integer'],
+            [['code', 'nombre'], 'required'],
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['code'], 'string', 'max' => 2],
             [['nombre'], 'string', 'max' => 255],
-            [['id'], 'unique'],
         ];
     }
 

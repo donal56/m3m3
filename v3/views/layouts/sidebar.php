@@ -6,12 +6,14 @@
     use yii\helpers\Url;
     use yii\helpers\Html;
     use app\models\Usuario;
-    use app\config\Settings;
+    use app\models\Etiqueta;
     use app\assets\AppAsset;
+    use app\config\Settings;
     use app\assets\SidebarAsset;
     use app\components\SemanticGhostDropdown;
 
     AppAsset::register($this);
+    SidebarAsset::register($this);
 
     $this->title = Yii::$app->name;
 
@@ -45,8 +47,46 @@
     <?php $this->head() ?>
 </head>
 
-<body>
+<body class="pushable">
     <?php $this->beginBody() ?>
+
+    <div class="ui left inverted vertical menu sidebar" id="sidebar">
+        <div class="item">
+            <a class="logo" href="<?= Url::home() ?>">m3m3</a>
+            <div class="logo-subtitle" href="#">&lt;Memes y más&gt;</div>
+        </div>
+        <a class="item title" href="#">
+            Categorias
+        </a>
+        <a class="item selected" data-tag="*" href="#">
+            Todo
+        </a>
+
+        <?php 
+            foreach (Etiqueta::findAllActives() as $tag) {
+
+                $html = "<a class='item' data-tag='" . Html::encode(strtolower($tag->nombre)) . "' href='#'>" . 
+                    "<i class='" . $tag->icon . " icon'></i>" . Html::encode($tag->nombre) . "</a>";
+
+                echo $html;
+            }
+        ?>
+
+        <a class="item title" href="#"></a>
+        <a class="item selected type" data-type="popular" href="#">
+            <i class="star icon"></i>
+            Popular
+        </a>
+        <a class="item type" data-type="tendencia" href="#">
+            <i class="rocket icon"></i>
+            Tendencia
+        </a>
+        <a class="item type" data-type="nuevo" href="#">
+            <i class="leaf icon"></i>
+            Nuevo
+        </a>
+        <?= Html::a("Subir meme ツ", Url::to("site/upload"), [ "class" => "item upload-post" ])?>
+    </div>
     <div class="ui secondary pointing top fixed white menu" id="navbar">
         <div class="ui container">
             <div class="left menu">
@@ -97,9 +137,12 @@
             </div>
         </div>
     </div>
-    <main>
-         <?= $content ?>
-    </main>
+    <div class="pusher">
+        <main>
+            <?= $content ?>
+        </main>
+    </div>
+
     <?php $this->endBody() ?>
 </body>
 

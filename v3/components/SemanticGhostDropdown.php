@@ -46,37 +46,6 @@
     
             return $allVisible;
         }
-
-        public static function authMenuItems() 
-        {
-            return [
-                [   
-                    'icon' => 'users',
-                    'label' => UserManagementModule::t('back', 'Users'), 
-                    'url' => ['/user-management/user/index'],
-                ],
-                [   
-                    'icon' => 'shield alternate',
-                    'label' => UserManagementModule::t('back', 'Roles'), 
-                    'url' => ['/user-management/role/index'],
-                ],
-                [   
-                    'icon' => 'check',
-                    'label' => UserManagementModule::t('back', 'Permissions'), 
-                    'url' => ['/user-management/permission/index'],
-                ],
-                [
-                    'icon' => 'check circle',
-                    'label' => UserManagementModule::t('back', 'Permission groups'), 
-                    'url' => ['/user-management/auth-item-group/index'],
-                ],
-                [
-                    'icon' => 'clipboard list',
-                    'label' => UserManagementModule::t('back', 'Visit log'), 
-                    'url' => ['/user-management/user-visit-log/index'],
-                ]
-            ];
-        }
-    } 
+    }
     
 ?>

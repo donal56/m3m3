@@ -29,10 +29,10 @@ class Etiqueta extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre'], 'required'],
-            [['id', 'activo'], 'integer'],
+            [['nombre', 'icon'], 'required'],
+            [['activo'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
-            [['id'], 'unique'],
+            [['icon'], 'string', 'max' => 30],
         ];
     }
 
@@ -45,6 +45,7 @@ class Etiqueta extends \app\components\CustomActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'activo' => 'Estatus',
+            'icon'  =>  'Ícono'
         ];
     }
 
@@ -60,7 +61,7 @@ class Etiqueta extends \app\components\CustomActiveRecord
 
     public static function getList() {
 
-        $etiquetas = self::find()->where(["activo" => 1])->all();
+        $etiquetas = self::findAllActives();
 
         $list = [];
 
@@ -68,5 +69,10 @@ class Etiqueta extends \app\components\CustomActiveRecord
             $list[$etiqueta->id] = $etiqueta->nombre;
         }
         return $list;
+    }
+
+    public static function findAllActives() {
+
+        return self::find()->where(["activo" => 1])->orderBy(["nombre" => "ASC"])->all();
     }
 }

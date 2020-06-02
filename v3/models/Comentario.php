@@ -37,12 +37,11 @@ class Comentario extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_publicacion'], 'required'],
-            [['id', 'id_usuario', 'id_publicacion'], 'integer'],
+            [['id_usuario', 'id_publicacion'], 'required'],
+            [['id_usuario', 'id_publicacion'], 'integer'],
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['texto'], 'string', 'max' => 255],
             [['media'], 'string', 'max' => 30],
-            [['id'], 'unique'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_publicacion'], 'exist', 'skipOnError' => true, 'targetClass' => Publicacion::className(), 'targetAttribute' => ['id_publicacion' => 'id']],
         ];

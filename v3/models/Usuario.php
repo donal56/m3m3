@@ -244,7 +244,43 @@ class Usuario extends \webvimark\modules\UserManagement\models\User
         return $this->hasMany(UserVisitLog::className(), ['user_id' => 'id']);
     }
 
-    public function avatarExists(){
+    public function avatarExists() {
 		return glob(self::AVATAR_BASE_PATH . $this->username .".*")[0];
+    }
+
+    public static function adminMenuOptions() 
+    {
+        return [
+            [
+                'icon' => 'tags',
+                'label' => 'Etiquetas', 
+                'url' => ['/etiqueta'],
+            ],
+            [   
+                'icon' => 'users',
+                'label' => UserManagementModule::t('back', 'Users'), 
+                'url' => ['/user-management/user/index'],
+            ],
+            [   
+                'icon' => 'shield alternate',
+                'label' => UserManagementModule::t('back', 'Roles'), 
+                'url' => ['/user-management/role/index'],
+            ],
+            [   
+                'icon' => 'check',
+                'label' => UserManagementModule::t('back', 'Permissions'), 
+                'url' => ['/user-management/permission/index'],
+            ],
+            [
+                'icon' => 'check circle',
+                'label' => UserManagementModule::t('back', 'Permission groups'), 
+                'url' => ['/user-management/auth-item-group/index'],
+            ],
+            [
+                'icon' => 'clipboard list',
+                'label' => UserManagementModule::t('back', 'Visit log'), 
+                'url' => ['/user-management/user-visit-log/index'],
+            ],
+        ];
     }
 }

@@ -21,7 +21,7 @@ $color= "green";
                 <?php $form = SemanticActiveForm::begin(["ajax" => [ "class" => "indicating small $color", "redirect" => Url::home() ]]) ?>
                     <?= $form->field($model, 'titulo')->textarea(["rows" => 2, "info" => "Max. 255 carácteres"]) ?>
                     <?= $form->field($model, 'media')->fileInput(false, ["accept" => ".png,.jpg,.jpeg,.gif,.mp4,.avi,.webm"]) ?>
-                    <?= $form->field($model, "relPublicacionEtiquetas")->listBox(Etiqueta::getList(), ['multiple' => true]) ?>
+                    <?= $form->field($model, "relPublicacionEtiquetas")->listBox(Etiqueta::getList(), ['multiple' => true, "size" => 6]) ?>
                     <?= $form->field($model, "nsfw")->toogle() ?>
                     <?= $form->submitButton('Publicar', null, ['class' => "ui $color fluid button"]) ?>
                     <?= $form->errorBox() ?>    

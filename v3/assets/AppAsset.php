@@ -17,7 +17,6 @@
         public $js = [
             'js/semantic.min.js',
             'js/base.js',
-            'js/global.js',
         ];
 
         public $depends = [

@@ -1,38 +1,35 @@
 <?php
+    use yii\helpers\Html;
+    use yii\widgets\DetailView;
 
-use yii\helpers\Html;
-use yii\widgets\DetailView;
+    /* @var $this yii\web\View */
+    /* @var $model app\models\Etiqueta */
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Etiqueta */
-
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Etiquetas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+    $this->title = $model->nombre;
+    \yii\web\YiiAsset::register($this);
 ?>
-<div class="etiqueta-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'nombre',
-            'activo',
-        ],
-    ]) ?>
+<div class="ui one-form container">
+    <div class="ui raised large card">
+        <div class="content">
+            <div class="fluid container">
+                <div class="header"><?= Html::encode($this->title) ?></div>
+                <div class="right floated">
+                    <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'ui green button']) ?>
+                </div>
+                <div class="right floated">
+                    <?= Html::a('Volver', ['index'], ['class' => 'ui blue button']) ?>
+                </div>
+            </div>
+            <div class="description">
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        'nombre:html',
+                        'activo:boolean',
+                    ],
+                ]) ?>
+            </div>
+        </div>
+    </div>
 
 </div>

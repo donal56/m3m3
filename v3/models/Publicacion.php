@@ -25,7 +25,7 @@ use webvimark\modules\UserManagement\models\User;
  */
 class Publicacion extends \app\components\CustomActiveRecord
 {
-    public $media_file;
+    public $media_file, $poster, $poster_avatar, $es_video, $comentarios, $puntuacion, $etiquetas, $me_gusta;
 
 	public const MEDIA_BASE_PATH = 'media/posts/';
 
@@ -49,6 +49,7 @@ class Publicacion extends \app\components\CustomActiveRecord
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['url'], 'string', 'max' => 10],
             [['titulo', 'media'], 'string', 'max' => 255],
+            ['titulo', 'trim'],
             [['url'], 'unique'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             ['media_file', 'file','extensions' => 'png, jpg, jpeg, gif, mp4, avi, webm', 'skipOnError' => true],
@@ -113,11 +114,13 @@ class Publicacion extends \app\components\CustomActiveRecord
         return $this->hasMany(RelPublicacionEtiqueta::className(), ['id_publicacion' => 'id']);
     }
 
-    public function mediaExists($key){
+    public function mediaExists($key)
+    {
 		return glob(self::MEDIA_BASE_PATH . $key .".*")[0];
     }
 
-    public static function generarURL() {
+    public static function generarURL() 
+    {
         $url = "";
 
         do {
@@ -128,7 +131,39 @@ class Publicacion extends \app\components\CustomActiveRecord
         return $url;
     }
 
-    private static function urlExists($url) {
+    private static function urlExists($url) 
+    {
         return Publicacion::findOne(["url" => $url]) != null;
     }
+
+    public function generarEtiquetas() 
+    {
+
+        $etiquetas = "";
+
+        foreach ($this->relPublicacionEtiquetas as $relation) {
+            $etiqueta = $relation->etiqueta;
+
+            if($etiqueta->activo)
+                $etiquetas .= "," . $etiqueta->nombre;
+        }
+
+        return $etiquetas;
+    }
+
+    public function getFriendlyDate() 
+    {
+        return Utilidades::friendlyDate($this->fecha_creacion);
+    }
+
+    public function getLike() 
+    {
+        return intval(intval($this->me_gusta) === 1);
+    }
+    
+    public function getDislike() 
+    {
+        return intval(intval($this->me_gusta) === -1);
+    }
+    
 }

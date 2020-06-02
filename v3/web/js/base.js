@@ -10,6 +10,8 @@ $.fn.form.settings.prompt = {
     postTitle   :   "Agregue un titulo para su publicación.",
     media       :   "Seleccione una imagen o video para su publicación.",
     etiquetas   :   "Seleccione de 1 a 5 etiquetas.",
+    nombreEtiqueta      :   "Etiqueta requerida. Máximo 100 carácteres.",
+    iconoEtiqueta       :   "Agregue un icono de la libreria Semantic UI.",
 }
 
 $.prototype.form.settings.text = {
@@ -37,7 +39,12 @@ $.fn.form.settings.rules.postTitle = value => $.fn.form.settings.rules.empty(val
 $.fn.form.settings.rules.media = value => $.fn.form.settings.rules.empty(value);
 
 $.fn.form.settings.rules.etiquetas = value => $.fn.form.settings.rules.minCount(value, 1) && $.fn.form.settings.rules.maxCount(value, 5);
- 
+
+$.fn.form.settings.rules.nombreEtiqueta = value => $.fn.form.settings.rules.empty(value) && $.fn.form.settings.rules.maxLength(value, 100);
+
+$.fn.form.settings.rules.iconoEtiqueta = value => $.fn.form.settings.rules.empty(value);
+
+
 
 $.fn.form.settings.defaults = {
     email : {
@@ -113,4 +120,49 @@ $.fn.form.settings.defaults = {
         rules       :   [ {  type   : 'etiquetas' } ],
     },
     
+    
+    nombreEtiqueta: {
+        identifier  :   'etiqueta-nombre',
+        rules       :   [ {  type   : 'nombreEtiqueta' } ],
+    },
+    iconoEtiqueta: {
+        identifier  :   'etiqueta-icon',
+        rules       :   [ {  type   : 'iconoEtiqueta' } ],
+    },
+    
 };
+
+
+
+/* Funciones */
+
+function iconPressed(component, dependentOf = false) {
+	const ACTIVE_COLOR 		= 	"black";
+	const INACTIVE_COLOR 	= 	"white";
+	
+	let active = Number(component.getAttribute("data-state"));
+
+	if(active) {
+		component.children[0].style.color = INACTIVE_COLOR;
+		component.setAttribute("data-state","0");
+	} else {
+		component.children[0].style.color = ACTIVE_COLOR;
+		component.setAttribute("data-state","1");
+		
+		if(dependentOf) {
+			let dependentEl = component.parentElement.querySelector(`${dependentOf}`);
+			let dependentIsActive = Number(dependentEl.getAttribute("data-state"));
+			
+			if(dependentIsActive) {
+				dependentEl.children[0].style.color = INACTIVE_COLOR;
+				dependentEl.setAttribute("data-state","0");
+			}	
+		}
+	}
+}
+
+
+/* Init UI components */
+
+$('.ui.dropdown').dropdown();
+$('.menu .item').tab();

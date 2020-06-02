@@ -1,26 +1,35 @@
-function iconPressed(component, dependentOf = false) {
-	const ACTIVE_COLOR 		= 	"black";
-	const INACTIVE_COLOR 	= 	"white";
-	
-	let active = Number(component.getAttribute("data-state"));
+function postAction(action, element, dependentOf = false) {
+	let post 		=	element.parentElement.parentElement.parentElement.parentElement;	
+	let csrfToken 	=	document.querySelector('meta[name="csrf-token"]')['content'];
 
-	if(active) {
-		component.children[0].style.color = INACTIVE_COLOR;
-		component.setAttribute("data-state","0");
-	} else {
-		component.children[0].style.color = ACTIVE_COLOR;
-		component.setAttribute("data-state","1");
-		
-		if(dependentOf) {
-			let dependentEl = component.parentElement.querySelector(`${dependentOf}`);
-			let dependentIsActive = Number(dependentEl.getAttribute("data-state"));
-			
-			if(dependentIsActive) {
-				dependentEl.children[0].style.color = INACTIVE_COLOR;
-				dependentEl.setAttribute("data-state","0");
-			}	
+	if(element.getAttribute("data-state") === "1")
+		action = "nullify";
+
+	$.ajax({
+		url: "/site/post?action=" + action,
+		data: {
+			_csrf 	: 	csrfToken,
+			id		:	post.getAttribute("data-id"),
+		},
+		method: "POST",
+		success: data => {
+			if(data) {
+				let dependentEl 		= 	element.parentElement.querySelector(`${dependentOf}`);
+				let dependentIsActive 	= 	Number(dependentEl.getAttribute("data-state"));			
+				
+				let likesSection 	= 	post.querySelector(".likes-section");
+				let captureGroups 	= 	likesSection.innerText.match(/(\d)(.*)/);
+				
+				let likes			=	Number(captureGroups[1]);
+
+				dependentIsActive ? (action == "like" ? likes+= 2 : likes-= 2) : (action == "like" ? likes++ : likes--);
+				
+				iconPressed(element, dependentOf);
+
+				likesSection.innerText	= 	likes + captureGroups[2]; 
+			}
 		}
-	}
+	});
 }
 
 function comentar(event, form) {	

@@ -91,7 +91,7 @@ class AuthController extends \webvimark\modules\UserManagement\controllers\AuthC
 			}
 		}
 
-		$this->layout = '/noSidebar';
+		$this->layout = '/simple';
 
 		return $this->renderIsAjax('registration', compact('model'));
 	}

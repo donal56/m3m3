@@ -32,9 +32,8 @@ class PuntajeComentario extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_comentario'], 'required'],
-            [['id', 'puntaje', 'id_usuario', 'id_comentario'], 'integer'],
-            [['id'], 'unique'],
+            [['id_usuario', 'id_comentario'], 'required'],
+            [['puntaje', 'id_usuario', 'id_comentario'], 'integer'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_comentario'], 'exist', 'skipOnError' => true, 'targetClass' => Comentario::className(), 'targetAttribute' => ['id_comentario' => 'id']],
         ];

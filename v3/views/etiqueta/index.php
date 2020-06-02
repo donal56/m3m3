@@ -8,33 +8,40 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Etiquetas';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="etiqueta-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?php Pjax::begin(); ?>
 
-    <p>
-        <?= Html::a('Create Etiqueta', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<div class="ui one-form container">
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'nombre',
-            'activo',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
+    <div class="ui raised large card">
+        <div class="content">
+            <div class="fluid container">
+                <div class="header"><?= Html::encode($this->title) ?></div>
+                <div class="right floated"><?= Html::a('Crear etiqueta', ['create'], ['class' => 'ui green button']) ?>
+                </div>
+            </div>
+            <div class="description">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'nombre:html',
+                        'activo:boolean',
+                        [
+                            'class'     => 'app\components\SemanticActionColumn',
+                            'template'  => '{view} {update}'
+                        ],
+                    ],
+                    'tableOptions' => [
+                        'class' => "ui table form"
+                    ]
+                ]); ?>
+            </div>
+        </div>
+    </div>
 
 </div>
+
+<?php Pjax::end(); ?>

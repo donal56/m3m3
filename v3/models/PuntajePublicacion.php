@@ -32,9 +32,8 @@ class PuntajePublicacion extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_publicacion'], 'required'],
-            [['id', 'puntaje', 'id_usuario', 'id_publicacion'], 'integer'],
-            [['id'], 'unique'],
+            [['id_usuario', 'id_publicacion'], 'required'],
+            [['puntaje', 'id_usuario', 'id_publicacion'], 'integer'],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_publicacion'], 'exist', 'skipOnError' => true, 'targetClass' => Publicacion::className(), 'targetAttribute' => ['id_publicacion' => 'id']],
         ];
