@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 01/06/2020 17:07:07
+ Date: 02/06/2020 04:45:58
 */
 
 SET NAMES utf8mb4;
@@ -43,8 +43,8 @@ INSERT INTO `asignacion` VALUES ('poster', 7, 1590305836);
 DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE `comentario`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `texto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `media` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `texto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `media` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `id_usuario` int(0) NOT NULL,
   `id_publicacion` int(0) NOT NULL,
   `fecha_creacion` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
@@ -54,11 +54,15 @@ CREATE TABLE `comentario`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comentario
 -- ----------------------------
+INSERT INTO `comentario` VALUES (2, 'offu', NULL, 1, 9, '2020-06-02 04:32:37', NULL);
+INSERT INTO `comentario` VALUES (3, 'bardo', NULL, 1, 10, '2020-06-02 04:33:02', NULL);
+INSERT INTO `comentario` VALUES (4, 'test', NULL, 1, 10, '2020-06-02 04:33:25', NULL);
+INSERT INTO `comentario` VALUES (5, 'asse san', '/media/posts/comments/Ho7EGaUS71EcNIPQvfza.jpg', 1, 10, '2020-06-02 04:45:30', NULL);
 
 -- ----------------------------
 -- Table structure for etiqueta
@@ -67,22 +71,23 @@ DROP TABLE IF EXISTS `etiqueta`;
 CREATE TABLE `etiqueta`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `activo` tinyint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of etiqueta
 -- ----------------------------
-INSERT INTO `etiqueta` VALUES (1, 'Animales', 1);
-INSERT INTO `etiqueta` VALUES (2, 'Anime', 1);
-INSERT INTO `etiqueta` VALUES (3, 'Comida', 1);
-INSERT INTO `etiqueta` VALUES (4, 'GIFs', 1);
-INSERT INTO `etiqueta` VALUES (5, 'Videos', 1);
-INSERT INTO `etiqueta` VALUES (6, 'Wholesome', 1);
-INSERT INTO `etiqueta` VALUES (7, 'Divertido', 1);
-INSERT INTO `etiqueta` VALUES (8, 'Dank', 1);
-INSERT INTO `etiqueta` VALUES (9, 'Depressing', 1);
+INSERT INTO `etiqueta` VALUES (1, 'Animales', 'paw', 1);
+INSERT INTO `etiqueta` VALUES (2, 'Anime', 'rocket', 1);
+INSERT INTO `etiqueta` VALUES (3, 'Comida', 'food', 0);
+INSERT INTO `etiqueta` VALUES (4, 'GIFs', 'bolt', 1);
+INSERT INTO `etiqueta` VALUES (5, 'Videos', 'play', 1);
+INSERT INTO `etiqueta` VALUES (6, 'Wholesome', 'star', 1);
+INSERT INTO `etiqueta` VALUES (7, 'Divertido', 'smile face', 1);
+INSERT INTO `etiqueta` VALUES (8, 'Dank', 'list', 0);
+INSERT INTO `etiqueta` VALUES (9, 'Depressing', 'sad face', 0);
 
 -- ----------------------------
 -- Table structure for grupo_permisos
@@ -114,7 +119,7 @@ CREATE TABLE `pais`  (
   `fecha_creacion` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `fecha_actualizacion` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pais
@@ -243,7 +248,7 @@ CREATE TABLE `publicacion`  (
   UNIQUE INDEX `url`(`url`) USING BTREE,
   INDEX `id_usuario`(`id_usuario`) USING BTREE,
   CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of publicacion
@@ -269,7 +274,7 @@ CREATE TABLE `puntaje_comentario`  (
   INDEX `id_publicacion`(`id_comentario`) USING BTREE,
   CONSTRAINT `puntaje_comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `puntaje_comentario_ibfk_2` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of puntaje_comentario
@@ -289,11 +294,15 @@ CREATE TABLE `puntaje_publicacion`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `puntaje_publicacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `puntaje_publicacion_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of puntaje_publicacion
 -- ----------------------------
+INSERT INTO `puntaje_publicacion` VALUES (1, 1, 1, 9);
+INSERT INTO `puntaje_publicacion` VALUES (2, -1, 1, 13);
+INSERT INTO `puntaje_publicacion` VALUES (3, NULL, 1, 10);
+INSERT INTO `puntaje_publicacion` VALUES (4, NULL, 1, 11);
 
 -- ----------------------------
 -- Table structure for rel_permiso_grupo_permisos
@@ -353,7 +362,7 @@ CREATE TABLE `rel_publicacion_etiqueta`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `rel_publicacion_etiqueta_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `rel_publicacion_etiqueta_ibfk_3` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rel_publicacion_etiqueta
@@ -363,7 +372,7 @@ INSERT INTO `rel_publicacion_etiqueta` VALUES (2, 9, 3);
 INSERT INTO `rel_publicacion_etiqueta` VALUES (3, 10, 2);
 INSERT INTO `rel_publicacion_etiqueta` VALUES (4, 11, 2);
 INSERT INTO `rel_publicacion_etiqueta` VALUES (5, 12, 7);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (6, 13, 9);
+INSERT INTO `rel_publicacion_etiqueta` VALUES (6, 13, 1);
 INSERT INTO `rel_publicacion_etiqueta` VALUES (7, 14, 7);
 
 -- ----------------------------
@@ -438,7 +447,7 @@ CREATE TABLE `visita`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `visita_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of visita
@@ -463,51 +472,55 @@ INSERT INTO `visita` VALUES (39, '5ed53546213c0', '127.0.0.1', 'es', 'Mozilla/5.
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `feed`;
 delimiter ;;
-CREATE PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text)
+CREATE PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text, IN `user` int)
 BEGIN
 	SET @paginacion = 3;
-	SET @desfase = page * @paginacion;
+	SET @desfase = (page - 1) * @paginacion;
+	SET @user = user;
 	
-	SET @query = "SELECT 
-	p.*,
-	u.username poster,
-	u.avatar poster_avatar,
-	p.media REGEXP '(.mp4|.avi|.webm)$' es_video,
-	IFNULL(c.numero, 0) comentarios,
-	IFNULL(l.numero, 0) puntuacion,
-	GROUP_CONCAT(DISTINCT e.nombre ORDER BY e.nombre SEPARATOR ', ') etiquetas
-	FROM publicacion p
-	INNER JOIN rel_publicacion_etiqueta rel  ON rel.id_publicacion = p.id
-	INNER JOIN etiqueta e ON rel.id_etiqueta = e.id
-	INNER JOIN usuario u ON p.id_usuario = u.id
-	LEFT JOIN (SELECT com.id_publicacion, count(com.id_publicacion) numero FROM comentario com) c ON c.id_publicacion = p.id
-	LEFT JOIN (SELECT pun.id_publicacion, sum(pun.id_publicacion) numero FROM puntaje_publicacion pun) l ON l.id_publicacion = p.id
-	WHERE e.activo = 1 ";
-	
-	IF tag IS NOT NULL THEN
-			SET @query = CONCAT(@query, " AND e.nombre = '", tag, "' ");
+	IF page >= 1 AND type IS NOT NULL THEN
+		SET @query = "SELECT 
+		p.*,
+		u.username poster,
+		u.avatar poster_avatar,
+		p.media REGEXP '(.mp4|.avi|.webm)$' es_video,
+		IFNULL(c.numero, 0) comentarios,
+		IFNULL(l.numero, 0) puntuacion,
+		GROUP_CONCAT(DISTINCT e.nombre ORDER BY e.nombre SEPARATOR ', ') etiquetas,
+		pun.puntaje me_gusta
+		FROM publicacion p
+		INNER JOIN rel_publicacion_etiqueta rel  ON rel.id_publicacion = p.id
+		INNER JOIN etiqueta e ON rel.id_etiqueta = e.id
+		INNER JOIN usuario u ON p.id_usuario = u.id
+		LEFT JOIN (SELECT com.id_publicacion, count(com.id_publicacion) numero FROM comentario com GROUP BY com.id_publicacion) c ON c.id_publicacion = p.id
+		LEFT JOIN (SELECT pun.id_publicacion, sum(pun.puntaje) numero FROM puntaje_publicacion pun GROUP BY pun.id_publicacion) l ON l.id_publicacion = p.id
+		LEFT JOIN puntaje_publicacion pun ON (pun.id_publicacion = p.id AND pun.id_usuario = ?)
+		WHERE e.activo = 1 ";
+		
+		IF tag IS NOT NULL THEN
+				SET @query = CONCAT(@query, " AND e.nombre = '", tag, "' ");
+		END IF;
+		
+		SET @query = CONCAT(@query, "GROUP BY p.id ");
+		
+		CASE type
+			WHEN "popular" THEN
+				SET @query = CONCAT(@query, "ORDER BY comentarios DESC ");
+			WHEN "tendencia" THEN
+				SET @query = CONCAT(@query, "ORDER BY puntuacion DESC ");
+			WHEN "nuevo" THEN
+				SET @query = CONCAT(@query, "ORDER BY p.fecha_creacion DESC ");
+			ELSE
+				BEGIN END;
+		END CASE;		
+		
+		SET @query = CONCAT(@query, "LIMIT ? OFFSET ?;");
+		
+		PREPARE stmt FROM @query;
+		EXECUTE stmt USING @user, @paginacion, @desfase;
+		DEALLOCATE PREPARE stmt;
+		
 	END IF;
-	
-	SET @query = CONCAT(@query, "GROUP BY p.id ");
-	
-	CASE type
-		WHEN "tendencia" THEN
-			SET @query = CONCAT(@query, "ORDER BY puntuacion DESC ");
-		WHEN "popular" THEN
-			SET @query = CONCAT(@query, "ORDER BY comentarios DESC ");
-		WHEN "nuevo" THEN
-			SET @query = CONCAT(@query, "ORDER BY p.fecha_creacion DESC ");
-		ELSE
-			BEGIN END;
-	END CASE;
-
-	
-	
-	SET @query = CONCAT(@query, "LIMIT ? OFFSET ?;");
-	
-	PREPARE stmt FROM @query;
-  EXECUTE stmt USING @paginacion, @desfase;
-  DEALLOCATE PREPARE stmt;
 END
 ;;
 delimiter ;

@@ -114,7 +114,7 @@ class Publicacion extends \app\components\CustomActiveRecord
         return $this->hasMany(RelPublicacionEtiqueta::className(), ['id_publicacion' => 'id']);
     }
 
-    public function mediaExists($key)
+    public static function mediaExists($key)
     {
 		return glob(self::MEDIA_BASE_PATH . $key .".*")[0];
     }

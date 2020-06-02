@@ -16,6 +16,7 @@
         public static $dataAttributes = ['aria', 'data', 'data-ng', 'ng'];
         public static $submitAttributesOrder = [ 'type', 'id', 'class', 'name', 'value', 'form', 'disabled' ];
         
+        public $script = true;
         public $enableClientScript = false;
         public $enableClientValidation = false;
 
@@ -35,9 +36,18 @@
             $html = Html::beginForm($this->action, $this->method, $this->options);
             $html .= $content;
 
+            if($this->script) 
+                $this->registerScript();
+          
+            $html .= Html::endForm();
+            return $html;
+        }
+        
+        private function registerScript() {
+
             $id = $this->options['id'];
             $view = $this->getView();
-
+            
             if($ajaxOptions = $this->ajax) {
                 $progressBarActiveText  =   $ajaxOptions["activeText"] ? $ajaxOptions["activeText"] : "Guardando cambios {value}%";
                 $progressBarSuccessText =   $ajaxOptions["successText"] ? $ajaxOptions["successText"] : "Datos guardados!";
@@ -154,9 +164,6 @@ SCRIPT;
             }
 
             $view->registerJs($script, $view::POS_END);
-
-            $html .= Html::endForm();
-            return $html;
         }
 
         public function submitButton($content = 'Submit', $icon = "", $options = [])
@@ -165,8 +172,10 @@ SCRIPT;
             $progressBar = "";
             
             if($icon) {
+                if($content)
+                    $options['class'].= " labeled icon";
+
                 $content = "<i class= '$icon icon'></i>" . $content;
-                $options['class'].= " labeled icon";
             }
 
             if($this->ajax) {

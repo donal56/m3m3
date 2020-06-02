@@ -2,6 +2,9 @@
 
     use yii\helpers\Url;
     use yii\helpers\Html;
+    use app\components\SemanticActiveForm;
+use yii\web\JsExpression;
+
 ?>
 
 <article style="display: none;" data-id= "<?= $model->url ?>">
@@ -56,19 +59,30 @@
                 </div>
             </div>
             <div class="ui fluid container comment-section">
-                <img class="ui left floated item avatar image" src="<?= Yii::$app->user->identity->avatar ?>" onclick="">
-                <form class="ui item unstackable form" onsubmit="return comentar(event, this)">
+                <img class="ui left floated item avatar image" src="<?= Yii::$app->user->identity->avatar ?>">
+                <?php $form = SemanticActiveForm::begin([
+                        "script" => false,
+                        "action" => Url::to("/comentario/new"),
+                        "options" => [
+                            "onsubmit"  =>  new JsExpression("return comentar(event, this)"),
+                            "class"     =>  "ui item unstackable form",
+                        ]]) 
+                ?>
                     <div class="inline fields">
-                        <div class="twelve wide field">
-                            <input type="text" name="comentario" class="comment-box" placeholder="Comenta algo gracioso..." required maxlength="280">
-                        </div>
-                        <div class="field">
-                            <button type="submit" class="ui green button">
-                                <i class="send icon"></i>
-                            </button>
-                        </div>
+                        <?= $form->field($modelCom, 'texto', ["options" => ['class' => 'twelve wide field']])
+                                ->textInput([
+                                    "max-length" => 255, 
+                                    "required" => "required",
+                                    "class" => "comment-box", 
+                                    "placeholder" => "Comenta algo gracioso..."])
+                                ->label(false); 
+                        ?>
+                        <?= $form->field($modelCom, 'media')->fileInput(false, ["accept" => ".png,.jpg,.jpeg,.gif",
+                                "style" => "display: block; visibility: hidden; width: 0; height: 0; padding: 0; border: 0;"])
+                                ->label("<i class= 'camera icon'></i>", ["class" => "ui blue button", "style" => "color: white; padding: 11.5px 21px;"])?>
+                        <?= $form->submitButton(null, "send", ['class' => "ui green button"]) ?>
                     </div>
-                </form>
+                <?php SemanticActiveForm::end() ?>
             </div>
         </div>
     </div>

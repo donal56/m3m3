@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\components\Utilidades;
 
 use webvimark\modules\UserManagement\models\User;
 
@@ -23,6 +24,10 @@ use webvimark\modules\UserManagement\models\User;
  */
 class Comentario extends \app\components\CustomActiveRecord
 {
+    public $media_file;
+
+	public const MEDIA_BASE_PATH = 'media/posts/comments/';
+
     /**
      * {@inheritdoc}
      */
@@ -37,13 +42,14 @@ class Comentario extends \app\components\CustomActiveRecord
     public function rules()
     {
         return [
-            [['id_usuario', 'id_publicacion'], 'required'],
+            [['id_usuario', 'id_publicacion', 'texto'], 'required'],
             [['id_usuario', 'id_publicacion'], 'integer'],
             [['fecha_creacion', 'fecha_actualizacion'], 'safe'],
             [['texto'], 'string', 'max' => 255],
-            [['media'], 'string', 'max' => 30],
+            [['media'], 'string', 'max' => 50],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
             [['id_publicacion'], 'exist', 'skipOnError' => true, 'targetClass' => Publicacion::className(), 'targetAttribute' => ['id_publicacion' => 'id']],
+            ['media_file', 'file','extensions' => 'png, jpg, jpeg, gif', 'skipOnError' => true],
         ];
     }
 
@@ -91,5 +97,22 @@ class Comentario extends \app\components\CustomActiveRecord
     public function getPuntajeComentarios()
     {
         return $this->hasMany(PuntajeComentario::className(), ['id_comentario' => 'id']);
+    }
+
+    public static function mediaExists($key)
+    {
+		return glob(self::MEDIA_BASE_PATH . $key .".*")[0];
+    }
+
+    public static function generarMedia() 
+    {
+        $media = "";
+
+        do {
+            $media = Utilidades::generateRandomString(20);
+        }
+        while(self::mediaExists($media));
+
+        return $media;
     }
 }

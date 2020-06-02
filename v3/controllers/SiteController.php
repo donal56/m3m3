@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use yii\web\Response;
 use app\models\Usuario;
 use yii\web\UploadedFile;
+use app\models\Comentario;
 use app\models\Publicacion;
 use app\components\Utilidades;
 use app\models\PuntajePublicacion;
@@ -105,12 +106,13 @@ class SiteController extends BaseController
                 $rows = $command->queryAll();
         
                 foreach ($rows as $row) {
-                    $model = new Publicacion();
+                    $model      =   new Publicacion();
+                    $modelCom   =   new Comentario();
         
                     $model->load($row, "", false);
         
                     $publicaciones[] = $model;
-                    $res .= $this->renderPartial("post_template", ["model" => $model]);
+                    $res .= $this->renderPartial("post_template", ["model" => $model, "modelCom" => $modelCom]);
                 }
                 
                 return $res;
