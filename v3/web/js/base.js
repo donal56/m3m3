@@ -136,17 +136,15 @@ $.fn.form.settings.defaults = {
 
 /* Funciones */
 
-function iconPressed(component, dependentOf = false) {
-	const ACTIVE_COLOR 		= 	"black";
-	const INACTIVE_COLOR 	= 	"white";
+function iconPressed(component, dependentOf = false, activeColor = "BLACK", inactiveColor = "WHITE") {
 	
 	let active = Number(component.getAttribute("data-state"));
 
 	if(active) {
-		component.children[0].style.color = INACTIVE_COLOR;
+		component.children[0].style.color = inactiveColor;
 		component.setAttribute("data-state","0");
 	} else {
-		component.children[0].style.color = ACTIVE_COLOR;
+		component.children[0].style.color = activeColor;
 		component.setAttribute("data-state","1");
 		
 		if(dependentOf) {
@@ -154,11 +152,23 @@ function iconPressed(component, dependentOf = false) {
 			let dependentIsActive = Number(dependentEl.getAttribute("data-state"));
 			
 			if(dependentIsActive) {
-				dependentEl.children[0].style.color = INACTIVE_COLOR;
+				dependentEl.children[0].style.color = inactiveColor;
 				dependentEl.setAttribute("data-state","0");
 			}	
 		}
 	}
+}
+
+function accesoDenegado() {
+    let html = '<div class="ui warning floating toast message"><i class="close icon"></i><div class="header">Acceso denegado!</div>Registrate ahora mismo para esta función y muchas más!</div>';
+
+    let template = document.createElement("template");
+    
+    template.innerHTML = html;
+
+    let mensajeEl = document.querySelector("body").appendChild(template.content.firstChild);
+
+    setTimeout( () => $(mensajeEl).transition('fade'), 5000);
 }
 
 

@@ -24,7 +24,7 @@ use webvimark\modules\UserManagement\models\User;
  */
 class Comentario extends \app\components\CustomActiveRecord
 {
-    public $media_file;
+    public $media_file, $poster, $poster_avatar, $es_video, $puntuacion, $me_gusta;
 
 	public const MEDIA_BASE_PATH = 'media/posts/comments/';
 
@@ -114,5 +114,20 @@ class Comentario extends \app\components\CustomActiveRecord
         while(self::mediaExists($media));
 
         return $media;
+    }
+
+    public function getFriendlyDate() 
+    {
+        return Utilidades::friendlyDate($this->fecha_creacion);
+    }
+
+    public function getLike() 
+    {
+        return intval(intval($this->me_gusta) === 1);
+    }
+    
+    public function getDislike() 
+    {
+        return intval(intval($this->me_gusta) === -1);
     }
 }

@@ -10,6 +10,7 @@ use yii\web\UploadedFile;
 use app\models\Comentario;
 use app\models\Publicacion;
 use app\components\Utilidades;
+use app\models\PuntajeComentario;
 use app\models\PuntajePublicacion;
 use yii\web\ForbiddenHttpException;
 use app\models\RelPublicacionEtiqueta;
@@ -17,7 +18,7 @@ use webvimark\modules\UserManagement\models\forms\ChangeOwnPasswordForm;
 
 class SiteController extends BaseController
 {
-    public $freeAccessActions = ['index'];
+    public $freeAccessActions = ['index', 'feed', 'comments'];
     //public $freeAccess = true;
 
     /**
@@ -41,6 +42,87 @@ class SiteController extends BaseController
         $this->layout = "/sidebar";
 
         return $this->render("feed");
+    }
+
+    
+    public function actionComment($action)
+    {
+       if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            $id    =   $_POST["id"];
+            $user   =   Yii::$app->user->identity->id;
+
+            $model  =   PuntajeComentario::find()
+                            ->innerJoin("comentario", "puntaje_comentario.id_comentario = comentario.id")
+                            ->where(["comentario.id" => $id, "puntaje_comentario.id_usuario" => $user])
+                            ->one();
+
+            if(!$model) {
+                $model = new PuntajeComentario();
+                $model->id_comentario = $id;
+            }
+            
+            $model->id_usuario = $user;
+            
+            switch ($action) {
+                case 'like':
+                    $model->puntaje = 1;
+                    break;
+                case 'dislike':
+                    $model->puntaje = -1;
+                    break;
+                case 'nullify':
+                    $model->puntaje = null;
+            }
+            
+            return $model->save(false);
+        }
+    }
+
+    public function actionComments($p)
+    {
+        if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+
+            Yii::$app->response->format = Response::FORMAT_HTML;
+
+            if(!$user = Yii::$app->user->identity->id)
+                $user = "null";
+
+            $comentarios = array();
+            $res = "";
+
+            $command = Yii::$app->db->createCommand("call comments('$p', 'nuevo', $user)");
+            $rows = $command->queryAll();
+    
+            foreach ($rows as $row) {
+                $model   =   new Comentario();
+    
+                $model->load($row, "", false);
+    
+                $comentarios[] = $model;
+
+                $res .= $this->renderPartial("comment_template", ["model" => $model]);
+            }
+            
+            return $res;
+
+        } else if( !Yii::$app->request->isAjax && Yii::$app->request->isGet ){
+
+            if(!$user = Yii::$app->user->identity->id)
+                $user = "null";
+
+            $model      =   new Publicacion();
+            $modelCom   =   new Comentario();
+
+            $command = Yii::$app->db->createCommand("call post('$p', $user)");
+            $row = $command->queryOne();
+    
+            $model->load($row, "", false);
+                
+            return $this->render('post', ["model" => $model, "modelCom" => $modelCom]);       
+        }
     }
 
     
@@ -92,8 +174,9 @@ class SiteController extends BaseController
             if( $page >= 0 && !empty($type !== null) ) {
                 Yii::$app->response->format = Response::FORMAT_HTML;
 
-                $user = Yii::$app->user->identity->id;
-    
+                if(!$user = Yii::$app->user->identity->id)
+                    $user = "null";
+
                 $publicaciones = array();
                 $res = "";
         

@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 02/06/2020 04:45:58
+ Date: 03/06/2020 03:20:56
 */
 
 SET NAMES utf8mb4;
@@ -54,7 +54,7 @@ CREATE TABLE `comentario`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comentario
@@ -63,6 +63,16 @@ INSERT INTO `comentario` VALUES (2, 'offu', NULL, 1, 9, '2020-06-02 04:32:37', N
 INSERT INTO `comentario` VALUES (3, 'bardo', NULL, 1, 10, '2020-06-02 04:33:02', NULL);
 INSERT INTO `comentario` VALUES (4, 'test', NULL, 1, 10, '2020-06-02 04:33:25', NULL);
 INSERT INTO `comentario` VALUES (5, 'asse san', '/media/posts/comments/Ho7EGaUS71EcNIPQvfza.jpg', 1, 10, '2020-06-02 04:45:30', NULL);
+INSERT INTO `comentario` VALUES (6, 'takyon', NULL, 1, 10, '2020-06-03 02:45:28', NULL);
+INSERT INTO `comentario` VALUES (7, 'eriri makes my peepee hard', NULL, 1, 10, '2020-06-03 02:46:07', NULL);
+INSERT INTO `comentario` VALUES (8, 'zoom that', '/media/posts/comments/vYA6bynewEzyyzmIllvW.png', 1, 10, '2020-06-03 02:49:20', NULL);
+INSERT INTO `comentario` VALUES (9, 'test', NULL, 1, 10, '2020-06-03 03:03:13', NULL);
+INSERT INTO `comentario` VALUES (10, 'a', NULL, 1, 10, '2020-06-03 03:03:53', NULL);
+INSERT INTO `comentario` VALUES (11, 'b', NULL, 1, 10, '2020-06-03 03:04:14', NULL);
+INSERT INTO `comentario` VALUES (12, 'c', NULL, 1, 10, '2020-06-03 03:04:31', NULL);
+INSERT INTO `comentario` VALUES (13, 'test', NULL, 1, 9, '2020-06-03 03:05:02', NULL);
+INSERT INTO `comentario` VALUES (14, 'a', NULL, 1, 9, '2020-06-03 03:06:16', NULL);
+INSERT INTO `comentario` VALUES (15, 'deli', NULL, 1, 9, '2020-06-03 03:06:23', NULL);
 
 -- ----------------------------
 -- Table structure for etiqueta
@@ -119,7 +129,7 @@ CREATE TABLE `pais`  (
   `fecha_creacion` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `fecha_actualizacion` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pais
@@ -279,6 +289,8 @@ CREATE TABLE `puntaje_comentario`  (
 -- ----------------------------
 -- Records of puntaje_comentario
 -- ----------------------------
+INSERT INTO `puntaje_comentario` VALUES (1, 1, 1, 15);
+INSERT INTO `puntaje_comentario` VALUES (2, 1, 1, 14);
 
 -- ----------------------------
 -- Table structure for puntaje_publicacion
@@ -294,7 +306,7 @@ CREATE TABLE `puntaje_publicacion`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `puntaje_publicacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `puntaje_publicacion_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of puntaje_publicacion
@@ -447,7 +459,7 @@ CREATE TABLE `visita`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `visita_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of visita
@@ -466,6 +478,50 @@ INSERT INTO `visita` VALUES (36, '5eca264c579cf', '127.0.0.1', 'es', 'Mozilla/5.
 INSERT INTO `visita` VALUES (37, '5eca28acc8e3d', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 7, 1590306988, 'Chrome', 'Windows');
 INSERT INTO `visita` VALUES (38, '5ed0b1f909fa4', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1590735353, 'Chrome', 'Windows');
 INSERT INTO `visita` VALUES (39, '5ed53546213c0', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591031110, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (40, '5ed7550d926d1', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591170317, 'Chrome', 'Windows');
+
+-- ----------------------------
+-- Procedure structure for comments
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `comments`;
+delimiter ;;
+CREATE PROCEDURE `comments`(IN `url` text, IN `type` text, IN `user` int)
+BEGIN
+	IF url IS NOT NULL THEN
+		SET @user = user;
+		SET @url = url;
+		
+		SET @query = "SELECT 
+		c.*,
+		u.username poster,
+		u.avatar poster_avatar,
+		c.media REGEXP '(.mp4|.avi|.webm)$' es_video,
+		IFNULL(l.numero, 0) puntuacion,
+		pun.puntaje me_gusta
+		FROM comentario c
+		INNER JOIN publicacion p ON c.id_publicacion = p.id
+		LEFT JOIN (SELECT pun.id_comentario, sum(pun.puntaje) numero FROM puntaje_comentario pun GROUP BY pun.id_comentario) l ON l.id_comentario = c.id
+		LEFT JOIN puntaje_comentario pun ON (pun.id_comentario = c.id AND pun.id_usuario = ?)
+		INNER JOIN usuario u ON c.id_usuario = u.id
+		WHERE p.url= ? ";
+		
+		CASE type
+			WHEN "destacado" THEN
+				SET @query = CONCAT(@query, "ORDER BY puntuacion DESC ");
+			WHEN "nuevo" THEN
+				SET @query = CONCAT(@query, "ORDER BY c.fecha_creacion DESC ");
+			ELSE
+				BEGIN END;
+		END CASE;		
+		
+		PREPARE stmt FROM @query;
+		EXECUTE stmt USING @user, @url;
+		DEALLOCATE PREPARE stmt;
+		
+	END IF;
+END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Procedure structure for feed
@@ -521,6 +577,35 @@ BEGIN
 		DEALLOCATE PREPARE stmt;
 		
 	END IF;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Procedure structure for post
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `post`;
+delimiter ;;
+CREATE PROCEDURE `post`(IN `url` text, IN `user` int)
+BEGIN
+	SELECT 
+	p.*,
+	u.username poster,
+	u.avatar poster_avatar,
+	p.media REGEXP '(.mp4|.avi|.webm)$' es_video,
+	IFNULL(c.numero, 0) comentarios,
+	IFNULL(l.numero, 0) puntuacion,
+	GROUP_CONCAT(DISTINCT e.nombre ORDER BY e.nombre SEPARATOR ', ') etiquetas,
+	pun.puntaje me_gusta
+	FROM publicacion p
+	INNER JOIN rel_publicacion_etiqueta rel  ON rel.id_publicacion = p.id
+	INNER JOIN etiqueta e ON rel.id_etiqueta = e.id
+	INNER JOIN usuario u ON p.id_usuario = u.id
+	LEFT JOIN (SELECT com.id_publicacion, count(com.id_publicacion) numero FROM comentario com GROUP BY com.id_publicacion) c ON c.id_publicacion = p.id
+	LEFT JOIN (SELECT pun.id_publicacion, sum(pun.puntaje) numero FROM puntaje_publicacion pun GROUP BY pun.id_publicacion) l ON l.id_publicacion = p.id
+	LEFT JOIN puntaje_publicacion pun ON (pun.id_publicacion = p.id AND pun.id_usuario = user)
+	WHERE e.activo = 1 AND p.url = url GROUP BY url;
+
 END
 ;;
 delimiter ;

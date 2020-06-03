@@ -138,6 +138,10 @@ body.pushable #home {
 	width: 900px;
 }
 
+.one-form.container .extra.large.card {
+	width: 1200px;
+}
+
 @media only screen and (max-width: 500px) {
     .one-form.container .small.card {
         width: 300px;
@@ -264,4 +268,11 @@ img.custom.thumbnail.avatar  {
     padding: 0 !important;
     border: 0 !important;
     visibility: hidden;
+}
+
+.toast.message {
+	position: fixed;
+    top: 45px;
+    right: 15px;
+    z-index: 1000;
 }

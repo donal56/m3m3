@@ -2,8 +2,8 @@
 
     use yii\helpers\Url;
     use yii\helpers\Html;
+    use yii\web\JsExpression;
     use app\components\SemanticActiveForm;
-use yii\web\JsExpression;
 
 ?>
 
@@ -12,7 +12,7 @@ use yii\web\JsExpression;
         <div class="content">
             <div class="ui left floated">
                 <a href="#"><img class="ui custom avatar image" src="<?= $model->poster_avatar ?>" onclick=""> <b>
-                        <?= $model->poster ?></a></b>
+                        <?= Html::encode($model->poster) ?></a></b>
             </div>
             <div class="right floated meta"><?= $model->getFriendlyDate() ?></div>
         </div>
@@ -27,7 +27,7 @@ use yii\web\JsExpression;
                 <?php } ?>
         </a>
         <div class="content">
-            <span class="left floated">
+            <span class="left floated comments-section">
                 <i class="comments outline icon"></i>
                 <?= $model->comentarios ?> comentarios
             </span>
@@ -51,15 +51,15 @@ use yii\web\JsExpression;
                 <div class="item comment-button" onclick="window.location= '<?= Url::to(["site/comments", "p" => $model->url]) ?>'">
                     <i class="comments icon"></i>
                 </div>
-                <div class="item facebook-button" onclick="window.open('https://www.facebook.com/sharer.php?t=Me reí&u=me.me')">
+                <div class="item facebook-button" onclick="window.open('https://www.facebook.com/sharer.php?t=Checa esto!&u=<?= Url::to(["site/comments", "p" => $model->url], true) ?>')">
                     <i class="facebook icon"></i>
                 </div>
-                <div class="item twitter-button" onclick="window.open('https://twitter.com/intent/tweet?text=Me reí&url=http%3A%2F%2Fme.me')">
+                <div class="item twitter-button" onclick="window.open('https://twitter.com/intent/tweet?text=Checa esto!&url=<?= Url::to(["site/comments", "p" => $model->url], true) ?>')">
                     <i class="twitter icon"></i>
                 </div>
             </div>
             <div class="ui fluid container comment-section">
-                <img class="ui left floated item avatar image" src="<?= Yii::$app->user->identity->avatar ?>">
+                <img class="ui left floated item avatar image" src="<?= Yii::$app->user->identity ? Yii::$app->user->identity->avatar : '/media/pp.png' ?>">
                 <?php $form = SemanticActiveForm::begin([
                         "script" => false,
                         "action" => Url::to("/comentario/new"),
