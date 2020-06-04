@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 03/06/2020 03:20:56
+ Date: 03/06/2020 21:25:34
 */
 
 SET NAMES utf8mb4;
@@ -36,6 +36,7 @@ CREATE TABLE `asignacion`  (
 -- ----------------------------
 INSERT INTO `asignacion` VALUES ('poster', 6, 1590186782);
 INSERT INTO `asignacion` VALUES ('poster', 7, 1590305836);
+INSERT INTO `asignacion` VALUES ('poster', 9, 1591237240);
 
 -- ----------------------------
 -- Table structure for comentario
@@ -54,25 +55,11 @@ CREATE TABLE `comentario`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comentario
 -- ----------------------------
-INSERT INTO `comentario` VALUES (2, 'offu', NULL, 1, 9, '2020-06-02 04:32:37', NULL);
-INSERT INTO `comentario` VALUES (3, 'bardo', NULL, 1, 10, '2020-06-02 04:33:02', NULL);
-INSERT INTO `comentario` VALUES (4, 'test', NULL, 1, 10, '2020-06-02 04:33:25', NULL);
-INSERT INTO `comentario` VALUES (5, 'asse san', '/media/posts/comments/Ho7EGaUS71EcNIPQvfza.jpg', 1, 10, '2020-06-02 04:45:30', NULL);
-INSERT INTO `comentario` VALUES (6, 'takyon', NULL, 1, 10, '2020-06-03 02:45:28', NULL);
-INSERT INTO `comentario` VALUES (7, 'eriri makes my peepee hard', NULL, 1, 10, '2020-06-03 02:46:07', NULL);
-INSERT INTO `comentario` VALUES (8, 'zoom that', '/media/posts/comments/vYA6bynewEzyyzmIllvW.png', 1, 10, '2020-06-03 02:49:20', NULL);
-INSERT INTO `comentario` VALUES (9, 'test', NULL, 1, 10, '2020-06-03 03:03:13', NULL);
-INSERT INTO `comentario` VALUES (10, 'a', NULL, 1, 10, '2020-06-03 03:03:53', NULL);
-INSERT INTO `comentario` VALUES (11, 'b', NULL, 1, 10, '2020-06-03 03:04:14', NULL);
-INSERT INTO `comentario` VALUES (12, 'c', NULL, 1, 10, '2020-06-03 03:04:31', NULL);
-INSERT INTO `comentario` VALUES (13, 'test', NULL, 1, 9, '2020-06-03 03:05:02', NULL);
-INSERT INTO `comentario` VALUES (14, 'a', NULL, 1, 9, '2020-06-03 03:06:16', NULL);
-INSERT INTO `comentario` VALUES (15, 'deli', NULL, 1, 9, '2020-06-03 03:06:23', NULL);
 
 -- ----------------------------
 -- Table structure for etiqueta
@@ -129,7 +116,7 @@ CREATE TABLE `pais`  (
   `fecha_creacion` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
   `fecha_actualizacion` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pais
@@ -163,25 +150,103 @@ CREATE TABLE `permiso`  (
 -- Records of permiso
 -- ----------------------------
 INSERT INTO `permiso` VALUES ('/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//controller', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//crud', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//extension', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//form', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//index', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//model', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('//module', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/asset/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/asset/compress', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/asset/template', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/cache/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/cache/flush', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/cache/flush-all', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/cache/flush-schema', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/cache/index', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/fixture/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/fixture/load', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/fixture/unload', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth-item-group/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/change-own-password', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/confirm-email', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/confirm-email-receive', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/confirm-registration-email', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/login', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/logout', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/password-recovery', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/password-recovery-receive', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/auth/registration', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/*', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/refresh-routes', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/set-child-permissions', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/set-child-routes', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/permission/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/*', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/bulk-activate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/bulk-deactivate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/bulk-delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/create', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/grid-page-size', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/grid-sort', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/index', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/set-child-permissions', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/set-child-roles', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/toggle-attribute', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/update', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/role/view', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-permission/*', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-permission/set', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-permission/set-roles', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/*', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/bulk-activate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/bulk-deactivate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/bulk-delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/create', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/grid-page-size', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/grid-sort', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/index', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/toggle-attribute', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/update', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user-visit-log/view', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/*', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/bulk-activate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/bulk-deactivate', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/bulk-delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/change-password', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/create', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/delete', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/grid-page-size', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/grid-sort', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/index', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/toggle-attribute', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/update', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/auth/user/view', 3, NULL, NULL, NULL, 1591237078, 1591237078, NULL);
+INSERT INTO `permiso` VALUES ('/base/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/comentario/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/comentario/new', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/db-explain', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/download-mail', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/toolbar', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/default/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/user/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/user/reset-identity', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/debug/user/set-identity', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/etiqueta/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/etiqueta/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/etiqueta/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/etiqueta/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/etiqueta/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/gii/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
 INSERT INTO `permiso` VALUES ('/gii/default/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
 INSERT INTO `permiso` VALUES ('/gii/default/action', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
@@ -189,31 +254,84 @@ INSERT INTO `permiso` VALUES ('/gii/default/diff', 3, NULL, NULL, NULL, 15723322
 INSERT INTO `permiso` VALUES ('/gii/default/index', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
 INSERT INTO `permiso` VALUES ('/gii/default/preview', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
 INSERT INTO `permiso` VALUES ('/gii/default/view', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/help/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/help/index', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/help/list', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/help/list-action-options', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/help/usage', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/message/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/message/config', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/message/config-template', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/message/extract', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/create', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/down', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/fresh', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/history', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/mark', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/new', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/redo', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/to', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/migrate/up', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/serve/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
-INSERT INTO `permiso` VALUES ('/serve/index', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
+INSERT INTO `permiso` VALUES ('/site/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/captcha', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/comment', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/comments', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/error', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/feed', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/post', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/settings', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/site/upload', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/*', 3, NULL, NULL, NULL, 1572332207, 1572332207, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth-item-group/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/auth/change-own-password', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/confirm-email', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/confirm-email-receive', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/confirm-registration-email', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/login', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/logout', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/password-recovery', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/password-recovery-receive', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/auth/registration', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/refresh-routes', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/set-child-permissions', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/set-child-routes', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/permission/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/set-child-permissions', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/set-child-roles', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/role/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-permission/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user-permission/set', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user-permission/set-roles', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/bulk-activate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/bulk-deactivate', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/bulk-delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/create', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/delete', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/grid-page-size', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/index', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/update', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user-visit-log/view', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user/*', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/bulk-activate', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/bulk-deactivate', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/bulk-delete', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
@@ -221,7 +339,9 @@ INSERT INTO `permiso` VALUES ('/user-management/user/change-password', 3, NULL, 
 INSERT INTO `permiso` VALUES ('/user-management/user/create', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/delete', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/grid-page-size', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user/grid-sort', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/index', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
+INSERT INTO `permiso` VALUES ('/user-management/user/toggle-attribute', 3, NULL, NULL, NULL, 1591237079, 1591237079, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/update', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('/user-management/user/view', 3, NULL, NULL, NULL, 1572332208, 1572332208, NULL);
 INSERT INTO `permiso` VALUES ('Admin', 1, 'Admin', NULL, NULL, 1572332207, 1572332207, NULL);
@@ -234,6 +354,7 @@ INSERT INTO `permiso` VALUES ('createUsers', 2, 'Create users', NULL, NULL, 1572
 INSERT INTO `permiso` VALUES ('deleteUsers', 2, 'Delete users', NULL, NULL, 1572332208, 1572332208, 'userManagement');
 INSERT INTO `permiso` VALUES ('editUserEmail', 2, 'Edit user email', NULL, NULL, 1572332208, 1572332208, 'userManagement');
 INSERT INTO `permiso` VALUES ('editUsers', 2, 'Edit users', NULL, NULL, 1572332208, 1572332208, 'userManagement');
+INSERT INTO `permiso` VALUES ('p', 2, 'poster', NULL, NULL, 1591236784, 1591236784, 'poster');
 INSERT INTO `permiso` VALUES ('poster', 1, 'poster', NULL, NULL, 1590079501, 1590079501, NULL);
 INSERT INTO `permiso` VALUES ('viewRegistrationIp', 2, 'View registration IP', NULL, NULL, 1572332208, 1572332208, 'userManagement');
 INSERT INTO `permiso` VALUES ('viewUserEmail', 2, 'View user email', NULL, NULL, 1572332208, 1572332208, 'userManagement');
@@ -263,12 +384,6 @@ CREATE TABLE `publicacion`  (
 -- ----------------------------
 -- Records of publicacion
 -- ----------------------------
-INSERT INTO `publicacion` VALUES (9, 'MoW86FCLxy', 'TREMENDA LA KEI', '/media/posts/8saMMAFrLYJ1poV.jpg', 1, 1, '2020-05-31 22:33:35', NULL);
-INSERT INTO `publicacion` VALUES (10, 'gX4UFGrI2G', 'HOLYY SHIIT IM FEELING IT', '/media/posts/GgRc7OtaSoDWOKV.png', 1, 1, '2020-05-31 23:31:06', NULL);
-INSERT INTO `publicacion` VALUES (11, 'wDMKVNyoCa', 'Different types of anime eyes', '/media/posts/0lKKNHfx8cxBAy5.jpg', 0, 1, '2020-06-01 11:41:46', NULL);
-INSERT INTO `publicacion` VALUES (12, 'edqhjNL5LT', 'When i tell a joke', '/media/posts/UhkbxN0cWN5j59t.jpg', 0, 1, '2020-06-01 13:43:40', NULL);
-INSERT INTO `publicacion` VALUES (13, 'X7PM7OcDBM', 'im craving for others approval', '/media/posts/B6Uww2asmoEkWRk.jpg', 0, 1, '2020-06-01 13:49:15', NULL);
-INSERT INTO `publicacion` VALUES (14, 'lo2ilHZ7DU', 'Kurt Cobain', '/media/posts/PjnS9d74LDL9mtH.jpg', 0, 1, '2020-06-01 13:50:26', NULL);
 
 -- ----------------------------
 -- Table structure for puntaje_comentario
@@ -284,13 +399,11 @@ CREATE TABLE `puntaje_comentario`  (
   INDEX `id_publicacion`(`id_comentario`) USING BTREE,
   CONSTRAINT `puntaje_comentario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `puntaje_comentario_ibfk_2` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of puntaje_comentario
 -- ----------------------------
-INSERT INTO `puntaje_comentario` VALUES (1, 1, 1, 15);
-INSERT INTO `puntaje_comentario` VALUES (2, 1, 1, 14);
 
 -- ----------------------------
 -- Table structure for puntaje_publicacion
@@ -306,15 +419,11 @@ CREATE TABLE `puntaje_publicacion`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `puntaje_publicacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `puntaje_publicacion_ibfk_2` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of puntaje_publicacion
 -- ----------------------------
-INSERT INTO `puntaje_publicacion` VALUES (1, 1, 1, 9);
-INSERT INTO `puntaje_publicacion` VALUES (2, -1, 1, 13);
-INSERT INTO `puntaje_publicacion` VALUES (3, NULL, 1, 10);
-INSERT INTO `puntaje_publicacion` VALUES (4, NULL, 1, 11);
 
 -- ----------------------------
 -- Table structure for rel_permiso_grupo_permisos
@@ -332,7 +441,22 @@ CREATE TABLE `rel_permiso_grupo_permisos`  (
 -- ----------------------------
 -- Records of rel_permiso_grupo_permisos
 -- ----------------------------
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/auth/auth/change-own-password');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/auth/auth/login');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/auth/auth/logout');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/comentario/new');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/comment');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/comments');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/error');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/feed');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/index');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/post');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/settings');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/site/upload');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('changeOwnPassword', '/user-management/auth/change-own-password');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/user-management/auth/change-own-password');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/user-management/auth/login');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('p', '/user-management/auth/logout');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('assignRolesToUsers', '/user-management/user-permission/set');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('assignRolesToUsers', '/user-management/user-permission/set-roles');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('editUsers', '/user-management/user/bulk-activate');
@@ -352,6 +476,7 @@ INSERT INTO `rel_permiso_grupo_permisos` VALUES ('Admin', 'changeUserPassword');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('Admin', 'createUsers');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('Admin', 'deleteUsers');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('Admin', 'editUsers');
+INSERT INTO `rel_permiso_grupo_permisos` VALUES ('poster', 'p');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('editUserEmail', 'viewUserEmail');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('assignRolesToUsers', 'viewUserRoles');
 INSERT INTO `rel_permiso_grupo_permisos` VALUES ('Admin', 'viewUsers');
@@ -374,18 +499,11 @@ CREATE TABLE `rel_publicacion_etiqueta`  (
   INDEX `id_publicacion`(`id_publicacion`) USING BTREE,
   CONSTRAINT `rel_publicacion_etiqueta_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `rel_publicacion_etiqueta_ibfk_3` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rel_publicacion_etiqueta
 -- ----------------------------
-INSERT INTO `rel_publicacion_etiqueta` VALUES (1, 9, 2);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (2, 9, 3);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (3, 10, 2);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (4, 11, 2);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (5, 12, 7);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (6, 13, 1);
-INSERT INTO `rel_publicacion_etiqueta` VALUES (7, 14, 7);
 
 -- ----------------------------
 -- Table structure for rol
@@ -433,14 +551,15 @@ CREATE TABLE `usuario`  (
   UNIQUE INDEX `avatar`(`avatar`) USING BTREE,
   INDEX `id_pais`(`id_pais`) USING BTREE,
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of usuario
 -- ----------------------------
-INSERT INTO `usuario` VALUES (1, 'superadmin', '5C9jI_mucpdpvPs386PLjK_ulOagiA4b', '$2y$13$4JFAiFV3fCILUexyeM2mCOssnWIPeWwm3hZZtQ6f0uTkTiiV0LyTy', NULL, 1, 1, 1572332206, 1590022648, NULL, '', 'admin@me.me', 1, NULL, NULL, 'Administrador', NULL, '/media/avatars/superadmin.png', NULL, 1, 1);
+INSERT INTO `usuario` VALUES (1, 'm3m3boss', 'zbW1eZpAQMkdriDVTeu810P1aIV_xBKY', '$2y$13$JRAll.pQglbCTVqMCWzaLeQ6g6OKU1m9JDGrT4c.CMRuwsDoRZueu', NULL, 1, 1, 1572332206, 1590022648, NULL, '', 'admin@me.me', 1, NULL, NULL, 'Administrador', '1998-06-22', '/media/avatars/superadmin.jpg', 1, 1, 0);
 INSERT INTO `usuario` VALUES (6, 'donal_56', 'kWLrv3PuaM_1rQQQmeXCnzOEe3ZNo5JQ', '$2y$13$7WRkGxgBfQW5FH1K.vE19.U.0MM4Xc/6jXhGGfR28HtVyTUdvpcIu', NULL, 1, NULL, 1590186782, 1590305423, '127.0.0.1', '', 'donal_56@hotmail.com', 0, NULL, NULL, 'Carlos Donaldo Ramon Gómez', NULL, '/media/avatars/donal_56.png', NULL, 0, NULL);
 INSERT INTO `usuario` VALUES (7, 'Usuario240', 'AI-pvChfBvK5FUtuHEaylw5IHNVvqHhg', '$2y$13$EcI6ZX/ysmskQ6jMkwSD5egW0UbE4940XN/B91ZmmxVhzLDhvmOBC', NULL, 1, NULL, 1590305836, 1590309123, '127.0.0.1', '', 'Usuario240@hotmail.com', 0, NULL, NULL, 'Usuario240', NULL, '/media/avatars/Usuario240.jpg', NULL, 0, NULL);
+INSERT INTO `usuario` VALUES (9, 'User5235', 'gGGpxY9SBiM9Y3KufI0pLPJCovhc7DWp', '$2y$13$mtg.5y1Im2i4aNDxAY6hiu3XRfcqvGwPibATbjzGjkDlz4USZ/RX2', NULL, 1, NULL, 1591237240, 1591237240, '127.0.0.1', '', 'user5235@hotmail.com', 0, NULL, NULL, 'Usuario', NULL, '/media/avatars/User5235.png', NULL, 0, NULL);
 
 -- ----------------------------
 -- Table structure for visita
@@ -459,7 +578,7 @@ CREATE TABLE `visita`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `visita_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of visita
@@ -479,6 +598,14 @@ INSERT INTO `visita` VALUES (37, '5eca28acc8e3d', '127.0.0.1', 'es', 'Mozilla/5.
 INSERT INTO `visita` VALUES (38, '5ed0b1f909fa4', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1590735353, 'Chrome', 'Windows');
 INSERT INTO `visita` VALUES (39, '5ed53546213c0', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591031110, 'Chrome', 'Windows');
 INSERT INTO `visita` VALUES (40, '5ed7550d926d1', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591170317, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (41, '5ed76055bde29', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591173205, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (42, '5ed84f8a20262', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591234442, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (43, '5ed855b461f12', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591236020, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (44, '5ed857647241e', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', NULL, 1591236452, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (45, '5ed8581c6cfc4', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591236636, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (46, '5ed85a78ebb64', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 9, 1591237240, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (47, '5ed85ad4b2943', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 1, 1591237332, 'Chrome', 'Windows');
+INSERT INTO `visita` VALUES (48, '5ed85b0290dd8', '127.0.0.1', 'es', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36', 9, 1591237378, 'Chrome', 'Windows');
 
 -- ----------------------------
 -- Procedure structure for comments
@@ -528,13 +655,13 @@ delimiter ;
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `feed`;
 delimiter ;;
-CREATE PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text, IN `user` int)
+CREATE PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text, IN `user` int, IN `nsfw` int)
 BEGIN
 	SET @paginacion = 3;
 	SET @desfase = (page - 1) * @paginacion;
 	SET @user = user;
 	
-	IF page >= 1 AND type IS NOT NULL THEN
+	IF page >= 1 AND type IS NOT NULL AND nsfw IN (1, 0)THEN
 		SET @query = "SELECT 
 		p.*,
 		u.username poster,
@@ -552,6 +679,10 @@ BEGIN
 		LEFT JOIN (SELECT pun.id_publicacion, sum(pun.puntaje) numero FROM puntaje_publicacion pun GROUP BY pun.id_publicacion) l ON l.id_publicacion = p.id
 		LEFT JOIN puntaje_publicacion pun ON (pun.id_publicacion = p.id AND pun.id_usuario = ?)
 		WHERE e.activo = 1 ";
+		
+		IF nsfw = 0 THEN
+				SET @query = CONCAT(@query, " AND p.nsfw = false ");
+		END IF;
 		
 		IF tag IS NOT NULL THEN
 				SET @query = CONCAT(@query, " AND e.nombre = '", tag, "' ");

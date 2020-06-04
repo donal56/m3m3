@@ -59,6 +59,8 @@
 
                 $script = <<<SCRIPT
                     let form_$id = document.querySelector("#$id");
+                    let form_progress_$id = $("#$id .hidden.progress");
+
                     let form_conf_$id = {
                         url : form_$id.action,
                         method : form_$id.method,
@@ -74,10 +76,10 @@
                         xhr : function()
                         {
                             let xhr = new window.XMLHttpRequest();
-                            let form_progress_$id = $("#$id .hidden.progress");
-                 
+                            
+                            form_progress_$id.progress('set percent', 0);
                             form_progress_$id.removeClass("hidden");
-
+                            
                             form_progress_$id.progress({
                                 total    : 100,
                                 text     : {
@@ -90,7 +92,7 @@
                                     $ajaxRedirect
                                 }
                             });
-
+                            
                             //Upload progress
                             xhr.upload.addEventListener("progress", function(evt) {
                                 if (evt.lengthComputable) {  
@@ -129,6 +131,8 @@
                                 Object.entries(fields).forEach( i => dataEl.append(i[0], i[1]) );
 
                                 $("#$id").find("input[type=file]").each( (n, i) => {
+                                    //dataEl.delete(i.name);
+                                    
                                     if(i.multiple) {
                                         dataEl.append(i.name, i.files);
                                     } else {

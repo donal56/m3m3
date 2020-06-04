@@ -1,10 +1,10 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text, IN `user` int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `feed`(IN `page` int, IN `type` text, IN `tag` text, IN `user` int, IN `nsfw` int)
 BEGIN
 	SET @paginacion = 3;
 	SET @desfase = (page - 1) * @paginacion;
 	SET @user = user;
 	
-	IF page >= 1 AND type IS NOT NULL THEN
+	IF page >= 1 AND type IS NOT NULL AND nsfw IN (1, 0)THEN
 		SET @query = "SELECT 
 		p.*,
 		u.username poster,
@@ -22,6 +22,10 @@ BEGIN
 		LEFT JOIN (SELECT pun.id_publicacion, sum(pun.puntaje) numero FROM puntaje_publicacion pun GROUP BY pun.id_publicacion) l ON l.id_publicacion = p.id
 		LEFT JOIN puntaje_publicacion pun ON (pun.id_publicacion = p.id AND pun.id_usuario = ?)
 		WHERE e.activo = 1 ";
+		
+		IF nsfw = 0 THEN
+				SET @query = CONCAT(@query, " AND p.nsfw = false ");
+		END IF;
 		
 		IF tag IS NOT NULL THEN
 				SET @query = CONCAT(@query, " AND e.nombre = '", tag, "' ");

@@ -43,10 +43,10 @@
         <div class="extra content">
             <div class="ui fluid five item grid container secondary compact text options-section menu">
                 <div class="item like-button" onclick="postAction('like', this, '.dislike-button');" data-state="<?= $model->like ?>">
-                    <i class="thumbs up icon" style = "<?= $model->like ? 'color: black;' : ''?>"></i>
+                    <i class="thumbs up icon" <?= $model->like ? 'style = "color: black;"' : ''?>></i>
                 </div>
                 <div class="item dislike-button" onclick="postAction('dislike', this, '.like-button');" data-state="<?= $model->dislike ?>">
-                    <i class="thumbs down icon" style = "<?= $model->dislike ? 'color: black;' : ''?>"></i>
+                    <i class="thumbs down icon" <?= $model->dislike ? 'style = "color: black;"' : ''?>></i>
                 </div>
                 <div class="item comment-button" onclick="window.location= '<?= Url::to(["site/comments", "p" => $model->url]) ?>'">
                     <i class="comments icon"></i>

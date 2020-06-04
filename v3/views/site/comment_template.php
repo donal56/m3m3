@@ -22,10 +22,10 @@
         <div class="actions">
             <span class= "likes-section"><a><?= $model->puntuacion ?>pts </a></span>
             <a class="like-button" onclick="postAction('like', this, '.dislike-button', <?= $model->id ?>);" data-state="<?= $model->like ?>">
-                <i class="arrow up icon" style = "<?= $model->like ? 'color: black;' : ''?>"></i>
+                <i class="arrow up icon" <?= $model->like ? 'style = "color: black;' : ''?>></i>
             </a>
             <a class="dislike-button" onclick="postAction('dislike', this, '.like-button', <?= $model->id ?>);" data-state="<?= $model->dislike ?>">
-                <i class="arrow down icon" style = "<?= $model->dislike ? 'color: black;' : ''?>"></i>
+                <i class="arrow down icon" <?= $model->dislike ? 'style = "color: black;"' : ''?>></i>
             </a>
             <a href="#"><i class="ellipsis horizontal icon"></i></a>
         </div>

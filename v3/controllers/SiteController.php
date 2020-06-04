@@ -44,10 +44,10 @@ class SiteController extends BaseController
         return $this->render("feed");
     }
 
-    
+
     public function actionComment($action)
     {
-       if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
 
             Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -55,17 +55,17 @@ class SiteController extends BaseController
             $user   =   Yii::$app->user->identity->id;
 
             $model  =   PuntajeComentario::find()
-                            ->innerJoin("comentario", "puntaje_comentario.id_comentario = comentario.id")
-                            ->where(["comentario.id" => $id, "puntaje_comentario.id_usuario" => $user])
-                            ->one();
+                ->innerJoin("comentario", "puntaje_comentario.id_comentario = comentario.id")
+                ->where(["comentario.id" => $id, "puntaje_comentario.id_usuario" => $user])
+                ->one();
 
-            if(!$model) {
+            if (!$model) {
                 $model = new PuntajeComentario();
                 $model->id_comentario = $id;
             }
-            
+
             $model->id_usuario = $user;
-            
+
             switch ($action) {
                 case 'like':
                     $model->puntaje = 1;
@@ -76,18 +76,18 @@ class SiteController extends BaseController
                 case 'nullify':
                     $model->puntaje = null;
             }
-            
+
             return $model->save(false);
         }
     }
 
     public function actionComments($p)
     {
-        if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
 
             Yii::$app->response->format = Response::FORMAT_HTML;
 
-            if(!$user = Yii::$app->user->identity->id)
+            if (!$user = Yii::$app->user->identity->id) 
                 $user = "null";
 
             $comentarios = array();
@@ -95,22 +95,21 @@ class SiteController extends BaseController
 
             $command = Yii::$app->db->createCommand("call comments('$p', 'nuevo', $user)");
             $rows = $command->queryAll();
-    
+
             foreach ($rows as $row) {
                 $model   =   new Comentario();
-    
+
                 $model->load($row, "", false);
-    
+
                 $comentarios[] = $model;
 
                 $res .= $this->renderPartial("comment_template", ["model" => $model]);
             }
-            
+
             return $res;
+        } else if (!Yii::$app->request->isAjax && Yii::$app->request->isGet) {
 
-        } else if( !Yii::$app->request->isAjax && Yii::$app->request->isGet ){
-
-            if(!$user = Yii::$app->user->identity->id)
+            if (!$user = Yii::$app->user->identity->id)
                 $user = "null";
 
             $model      =   new Publicacion();
@@ -118,17 +117,20 @@ class SiteController extends BaseController
 
             $command = Yii::$app->db->createCommand("call post('$p', $user)");
             $row = $command->queryOne();
-    
+
             $model->load($row, "", false);
-                
-            return $this->render('post', ["model" => $model, "modelCom" => $modelCom]);       
+
+            if( Yii::$app->user->identity->nsfw || ! $model->nsfw)
+                return $this->render('post', ["model" => $model, "modelCom" => $modelCom]);
+            else
+                $this->redirect(Yii::$app->homeUrl);
         }
     }
 
-    
+
     public function actionPost($action)
     {
-       if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
 
             Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -136,18 +138,18 @@ class SiteController extends BaseController
             $user   =   Yii::$app->user->identity->id;
 
             $model  =   PuntajePublicacion::find()
-                            ->innerJoin("publicacion", "puntaje_publicacion.id_publicacion = publicacion.id")
-                            ->where(["publicacion.url" => $url, "puntaje_publicacion.id_usuario" => $user])
-                            ->one();
+                ->innerJoin("publicacion", "puntaje_publicacion.id_publicacion = publicacion.id")
+                ->where(["publicacion.url" => $url, "puntaje_publicacion.id_usuario" => $user])
+                ->one();
 
-            if(!$model) {
+            if (!$model) {
                 $model = new PuntajePublicacion();
                 $id = Publicacion::findOne(["url" => $url])->id;
                 $model->id_publicacion = $id;
             }
-            
+
             $model->id_usuario = $user;
-            
+
             switch ($action) {
                 case 'like':
                     $model->puntaje = 1;
@@ -158,46 +160,50 @@ class SiteController extends BaseController
                 case 'nullify':
                     $model->puntaje = null;
             }
-            
+
             return $model->save(false);
         }
     }
 
     public function actionFeed()
     {
-       if( Yii::$app->request->isAjax && Yii::$app->request->isPost ) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
 
             $page   =   intval($_POST["page"]);
             $type   =   $_POST["type"];
             $tag    =   $_POST["tag"];
 
-            if( $page >= 0 && !empty($type !== null) ) {
+            if ($page >= 0 && !empty($type !== null)) {
                 Yii::$app->response->format = Response::FORMAT_HTML;
 
-                if(!$user = Yii::$app->user->identity->id)
+                if (!$user = Yii::$app->user->identity->id) {
                     $user = "null";
+                    $nsfw = "false";
+                } else {
+                    $nsfw = strval(Yii::$app->user->identity->nsfw);
+                }
 
                 $publicaciones = array();
                 $res = "";
-        
-                if($tag === "*")
+
+                if ($tag === "*")
                     $tag = "null";
                 else
                     $tag = "'$tag'";
 
-                $command = Yii::$app->db->createCommand("call feed($page, '$type', $tag, $user)");
+                $command = Yii::$app->db->createCommand("call feed($page, '$type', $tag, $user, $nsfw)");
                 $rows = $command->queryAll();
-        
+
                 foreach ($rows as $row) {
                     $model      =   new Publicacion();
                     $modelCom   =   new Comentario();
-        
+
                     $model->load($row, "", false);
-        
+
                     $publicaciones[] = $model;
                     $res .= $this->renderPartial("post_template", ["model" => $model, "modelCom" => $modelCom]);
                 }
-                
+
                 return $res;
             }
         }
@@ -260,19 +266,54 @@ class SiteController extends BaseController
 
             $datos = Yii::$app->request->post();
 
+            $user->email = "";
+
             if (isset($datos["Usuario"]) && $user->load($datos)) {
-                if ($user->save())
+
+                $attrs = [];
+
+                if ($user->avatar != "undefined") {
+                    $user->avatar_file = UploadedFile::getInstance($user, 'avatar');
+
+                    $imagen = $user::AVATAR_BASE_PATH . $user->username .  '.' . $user->avatar_file->extension;
+
+                    if ($user->avatar_file) {
+
+                        unlink($user->avatarExists());
+
+                        $user->avatar_file->saveAs($imagen);
+                        $user->avatar = "/" . $imagen;
+                    }
+                    
+                    $attrs[] = "avatar";
+                }
+
+                if ($user->email !== "")
+                    $attrs[] = "email";
+                if ($user->nsfw !== "")
+                    $attrs[] = "nsfw";
+                if ($user->fecha_nacimiento  !== "")
+                    $attrs[] = "fecha_nacimiento";
+                if ($user->id_pais  !== "")
+                    $attrs[] = "id_pais";
+                if ($user->sexo  !== "")
+                    $attrs[] = "sexo";
+
+                if ($user->save(true, $attrs)) {
                     return true;
-                else
+                } else {
+                    Yii::$app->response->setStatusCode(400);
                     return $user->getErrors();
+                }
             } else if (isset($datos["ChangeOwnPasswordForm"]) && $changePassword->load($datos)) {
                 if ($changePassword->changePassword()) {
                     Yii::$app->user->logout();
                     $this->redirect(Yii::$app->homeUrl);
                     return true;
-                } else
-                    //return $changePassword->getErrors();
-                    return $changePassword->hasErrors();
+                } else {
+                    Yii::$app->response->setStatusCode(400);
+                    return $changePassword->getErrors();
+                }
             }
         }
 

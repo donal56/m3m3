@@ -11,6 +11,12 @@ use yii\web\UploadedFile;
 
 class AuthController extends \webvimark\modules\UserManagement\controllers\AuthController
 {
+
+	public function actions()
+	{
+		return [ ];
+	}
+
 	/**
 	 * Registration logic
 	 *

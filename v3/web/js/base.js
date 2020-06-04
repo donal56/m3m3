@@ -61,7 +61,7 @@ $.fn.form.settings.defaults = {
         identifier  :   'registrationform-nombre',
         rules       :   [ {  type   : 'nombre' } ],
     },
-    email : {
+    email2 : {
         identifier  :   'registrationform-email',
         rules       :   [ {  type   : 'correo' } ],
     },
@@ -73,7 +73,7 @@ $.fn.form.settings.defaults = {
         identifier  :   'registrationform-avatar',
         rules       :   [ {  type   : 'avatar' } ],
     },
-    password : {
+    password2 : {
         identifier  :   'registrationform-password',
         rules       :   [ {  type   : 'contraseña' } ],
     },
@@ -82,26 +82,17 @@ $.fn.form.settings.defaults = {
         rules       :   [ {  type   : 'coincidirContraseña[registrationform-password]' } ],
     },
 
-
-    username : {
-        identifier  :   'usuario-username',
-        rules       :   [ {  type   : 'usuario' } ],
-    },
-    email : {
-        identifier  :   'usuario-email',
-        rules       :   [ {  type   : 'correo' } ],
-    },
-
+    
     
     current_password : {
         identifier  :   'changeownpasswordform-current_password',
         rules       :   [ {  type   : 'contraseña' } ],
     },
-    password : {
+    password3 : {
         identifier  :   'changeownpasswordform-password',
         rules       :   [ {  type   : 'contraseña' } ],
     },
-    repeatPassword : {
+    repeatPassword2 : {
         identifier  :   'changeownpasswordform-repeat_password',
         rules       :   [ {  type   : 'coincidirContraseña[changeownpasswordform-password]' } ],
     },

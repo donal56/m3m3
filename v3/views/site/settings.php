@@ -25,9 +25,8 @@ $color= "blue";
             </div>
             <div class="ui bottom attached active tab segment" data-tab="usuario">
                 <?php $form = SemanticActiveForm::begin(["ajax" => [ "class" => "indicating small $color" ]]) ?>
-			    	<?= $form->field($model, 'username')->textInput(['max-length' => '50']) ?>
 				    <?= $form->field($model, 'avatar')->fileInput(true, ["accept" => ".jpg,.jpeg,.png"]) ?>
-                    <?= $form->field($model, 'email')->textInput(['type' => 'email']) ?>
+                    <?= $form->field($model, 'email')->textInput(['type' => 'email', 'value' => '', 'placeholder' => $model->email]) ?>
                     <?= $form->field($model, 'nsfw')->toogle() ?>
                     <?= $form->submitButton('Guardar cambios', null, ['class' => "ui $color fluid button"]) ?>
                     <?= $form->errorBox() ?>    

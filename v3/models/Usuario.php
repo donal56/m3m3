@@ -83,7 +83,9 @@ class Usuario extends \webvimark\modules\UserManagement\models\User
                 'targetAttribute' => 'username',
             ],
             
-            [['status', 'superadmin', 'created_at', 'updated_at', 'email_confirmed', 'id_pais', 'nsfw', 'sexo'], 'integer'],
+            [['status', 'superadmin', 'created_at', 'updated_at', 'email_confirmed', 'id_pais', 'nsfw'], 'integer'],
+
+            ['sexo', 'boolean', 'trueValue' => 'true', 'falseValue' => 'false', 'skipOnEmpty' => true],
             
 			['email', 'email'],
 			['email', 'validateEmailConfirmedUnique'],
