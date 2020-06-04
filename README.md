@@ -6,16 +6,17 @@ Evolución de un proyecto en 3 fases: _Standalone_, _frontend_ y _backend_, con 
 
 ### Acceso
 
+_Base de datos_
 - BD m3m3
 - USUARIO admin
 - CONTRASEÑA pass
 
-~Cuenta administrador~
+_Cuenta administrador_
 - USUARIO m3m3boss
 - EMAIL admin@me.me
 - CONTRASEÑAAdministrador69
 
-~Cuenta común~
+_Cuenta común_
 - USUARIO user5235
 - EMAIL user5235@hotmail.com
 - CONTRASEÑA User5235
