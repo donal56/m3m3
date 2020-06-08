@@ -25,6 +25,7 @@ vendor/**
 !vendor/webvimark/module-user-management/views/auth/login.php
 !vendor/webvimark/module-user-management/views/auth/registration.php
 !vendor/webvimark/module-user-management/models/forms/LoginForm.php
+!vendor/webvimark/module-user-management/models/User.php
 
 # composer itself is not needed
 composer.phar
